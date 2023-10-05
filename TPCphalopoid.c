@@ -3,7 +3,10 @@
 #include "variables.h"
 #include "jugador.h"
 #include "computadora.h"
-//Funcion que limpia el buffer
+#include <stdint.h>
+//Funcion que liwmpia el buffer
+
+
 
 void limpiarBuffer(){
 	int x=0;
@@ -23,7 +26,7 @@ void imprimirMatriz()
         if (i % 5 == 0)
             enter();
         if (lamatriz[i][0][0] != '\0')
-            printf(" %s ", lamatriz[i][0][0]);
+            printf(" %c ", lamatriz[i][0][0]);
         else
             printf(" - ");
     }

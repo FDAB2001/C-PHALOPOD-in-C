@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "variables.h"
-#include "TPCphalopoid.c"
+//#include "variables.h"
+
+extern char lamatriz[26][7][2];
+
+extern int turnoinicial;
 
 int validarJugada(){
     printf("Su posicion: ");
@@ -16,7 +19,7 @@ int validarJugada(){
                 if (lamatriz[posicion][j][i]!='/0')
                 {
                     printf("La posicion seleccionada tiene un dado, seleccione otra\n");
-                    posicion=0;
+                    posicion=0;validarJugada;
                 }
                 
             }
