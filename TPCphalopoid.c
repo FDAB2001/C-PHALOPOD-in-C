@@ -6,7 +6,20 @@
 #include <stdint.h>
 //Funcion que liwmpia el buffer
 
+typedef enum
+{
+	ROJO,
+	VERDE
+}color;
 
+typedef struct
+{
+	uint8_t valorDado;//NUmero del 1 al 6
+	color colorDado; //color del dado
+
+}casilla;
+
+casilla tablero[5][5];
 
 void limpiarBuffer(){
 	int x=0;
