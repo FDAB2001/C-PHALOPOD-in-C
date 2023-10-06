@@ -5,31 +5,32 @@
 extern char lamatriz[26][7][2];
 
 extern int turnoinicial;
-
+//valida algunas cosas de la jugada del jugador
 int validarJugada(){
     printf("Su posicion: ");
     int posicion=0;
     scanf("%d",&posicion);
+    limpiarBuffer();
     enter();
     while ((posicion<1 || posicion>25))
     {
         printf("Posicion invalida, seleccione otra posicion: ");
-        for(int i=0;i<2;i++){
-            for(int j=0;j<6;j++){
-                if (lamatriz[posicion][j][i]!='/0')
-                {
-                    printf("La posicion seleccionada tiene un dado, seleccione otra\n");
-                    posicion=0;validarJugada;
+        scanf("%d",&posicion);
+        limpiarBuffer();
+        enter();
+        for (int i = 1; i < 26; i++)
+            {
+                if (lamatriz[i][0][0] != '\0'){
+                    posicion=0;
+                	printf("La posicion tiene un dado \n");
                 }
-                
             }
-        }
     }
-    limpiarBuffer();
+
     return posicion;
 }
-
-void jugador(){
+//aca se maneja todo lo que tenga que ver con el jugador
+int jugador(int turno){
     int correcto=0;
     while (correcto==0)
     {
@@ -38,13 +39,16 @@ void jugador(){
         imprimirMatriz();
         printf("Tabla de posiciones:\n");
         for(int i=1;i<26;i++){
+        	printf("| %d |",i);
+        	if (i<10)
+        	    printf(" ");
             if (i%5==0)
                 enter();
-            
-            printf("| %d |",i);
         }
         int jugada=validarJugada();
-        lamatriz[jugada][1][0]=1;
+        lamatriz[jugada][0][0]='1';
+        turno=2;
+        return turno;
 
     }
     

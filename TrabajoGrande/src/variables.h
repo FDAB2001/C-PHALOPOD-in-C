@@ -5,6 +5,7 @@
 
 char lamatriz[26][7][2];
 
+//de quien es el turno inicial
 int turnoinicial;
 
 #endif //VARIABLES_H_

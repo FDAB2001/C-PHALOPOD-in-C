@@ -10,6 +10,6 @@
 
 //SOLO PROTOTIPO DE FUNCIONES Y VARIABLES
 int validarJugada(void);
-void jugador(void);
+int jugador(int);
 
 #endif /* JUGADOR_H_ */
