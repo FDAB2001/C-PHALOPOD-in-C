@@ -7,10 +7,10 @@ extern int posiocupada[1];
 extern int turnoinicial;
 
 int computadora(turno){
-	printf("hola si paso %d",turnoinicial);
+	int contadordeposis=0;
 	turno=1;
+	enter();
 	if(turnoinicial==2){
-		printf("hola si paso");
 		srand(time(NULL));
 		int numerorandom = rand() % 25 + 1;
 		lamatriz[numerorandom][0][0]='1';
@@ -138,9 +138,39 @@ int computadora(turno){
 															}
 		}
 
+		if(posiocupada[1]==5){
+					if(lamatriz[2][0][0]=='\0'){
+						lamatriz[4][0][0]='1';
+						return(turno);
+					}
+
+
+						if(lamatriz[6][0][0]=='\0'){
+							lamatriz[10][0][0]='1';
+							return(turno);
+
+						}
+
+					}
+
+
+
+
+		srand(time(NULL));
+		int numerorandom = rand() % 25 + 1;
+		while(lamatriz[numerorandom][0][0]!='\0'){
+			srand(time(NULL));
+			numerorandom = rand() % 25 + 1;
+			lamatriz[numerorandom][0][0]='1';
+			return(turno);
+
+		}
+
+
 	}
 
 return(turno);
 
 
 }
+
