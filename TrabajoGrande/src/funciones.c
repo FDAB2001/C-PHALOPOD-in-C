@@ -23,7 +23,7 @@ void imprimirMatriz()
     for (int i = 1; i < 26; i++)
     {
         if (lamatriz[i][0][0] != '\0')
-            printf(" %c ", lamatriz[i][0][0]);
+            printf(" %d ", lamatriz[i][0][0]);
         else
             printf(" - ");
         if (i % 5 == 0)
