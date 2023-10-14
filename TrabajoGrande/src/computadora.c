@@ -6,6 +6,34 @@ extern char lamatriz[26][7][2];
 extern int posiocupada[1];
 extern int turnoinicial;
 
+void ponerDado(int jugada){
+	// EJEMPLO PARA ENTENDER LA MATRIZ
+			// CASO : tenes un dado 1 que queres meter en 8
+			//lamatriz[8][0][0]= 1, esto ahora quiere decir que pusiste tu dado, luego:
+			//lamatriz[8][1][0]= 2, esto quiere decir que la computadora puso el dado
+			// CASO : en las posiciones 7 y 9 hay dados ricos de unidad 3 y decidiste comer ambos dados
+			//lamatriz[8][0][0]=3+3 (ya que la suma de ambos dados es 3+3)
+			//lamatriz[8][3+3][0]=2 (ya que vos sos la AI)
+	if((jugada>6&&jugada<10)||(jugada>11&&jugada<15)||(jugada>16&&jugada<20)){
+		//si la jugada esta en "medio" de la matriz se puede sumar cosas de arriba abajo izquierda y derecha
+		//
+	}
+	if(jugada==1||jugada==5||jugada==21||jugada==25){
+		//si la jugada esta en las esquinas, abajo derecha o abajo izquierda o arriba derecha o arriba izquieda, solo estas 4 opciones hay
+	}
+	if(jugada==2||jugada==3||jugada==4){
+		//si la jugada esta en la primera fila, abajo derecha e izquierda
+	}
+	if(jugada==6||jugada==11||jugada==16){
+		// si la jugada esta en la primera columna, arriba abajo y derecha
+	}
+	if(jugada==10||jugada==15||jugada==20){
+		// si la jugada esta en la quinta columna, arriba abajo e izquieda
+		}
+	if(jugada==6||jugada==11||jugada==16){
+			// si la jugada esta en la ultima fila, arriba izquieda y derecha
+		}
+}
 int computadora(turno){
 	int contadordeposis=0;
 	turno=1;
