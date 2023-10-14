@@ -29,9 +29,10 @@ int jugador(int turno){
         printf("Tablero actual: \n");
         imprimirMatriz();
         int jugada=validarJugada();
-        lamatriz[jugada][0][0]='1';
+        lamatriz[jugada][0][0]=1;
         posiocupada[1]=jugada;
-        lamatriz[jugada][1][0]='1';
+        lamatriz[jugada][1][0]=1;
         turno=2;
         return turno;
 }
+
