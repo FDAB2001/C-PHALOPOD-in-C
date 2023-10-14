@@ -6,7 +6,7 @@ extern char lamatriz[26][7][2];
 extern int posiocupada[1];
 extern int turnoinicial;
 
-int computadora(int turno){
+int computadora(turno){
 	int contadordeposis=0;
 	turno=1;
 	enter();
@@ -155,7 +155,7 @@ int computadora(int turno){
 
 
 
-
+		
 		srand(time(NULL));
 		int numerorandom = rand() % 25 + 1;
 		while(lamatriz[numerorandom][0][0]!='\0'){
@@ -165,6 +165,7 @@ int computadora(int turno){
 			return(turno);
 
 		}
+		lamatriz[numerorandom][0][0]='1';
 
 
 	}
@@ -173,3 +174,4 @@ return(turno);
 
 
 }
+
