@@ -2,7 +2,7 @@
 #include <stdlib.h>
 //#include "variables.h"
 
-extern char lamatriz[26][7][2];
+extern int lamatriz[26][7][2];
 
 extern int turnoinicial;
 //valida algunas cosas de la jugada del jugador
@@ -46,7 +46,7 @@ int jugador(int turno){
                 enter();
         }
         int jugada=validarJugada();
-        lamatriz[jugada][0][0]='1';
+        lamatriz[jugada][0][0]=1;
         turno=2;
         return turno;
 
