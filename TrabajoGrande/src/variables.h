@@ -3,7 +3,7 @@
 //la primera dimension es la posicion, la segunda es el numero del dado, la tercera es si es del jugador (0) o la maquina (1)
 
 
-char lamatriz[26][7][2];
+int lamatriz[26][7][2];
 
 //de quien es el turno inicial
 int turnoinicial;
