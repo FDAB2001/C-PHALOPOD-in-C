@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-extern char lamatriz[26][7][2];
+extern int lamatriz[26][7][2];
 extern int posiocupada[1];
 extern int turnoinicial;
 
