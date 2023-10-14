@@ -4,8 +4,8 @@
 
 
 char lamatriz[26][7][2];
-
+extern int posiocupada[1];
 //de quien es el turno inicial
 int turnoinicial;
 
-#endif //VARIABLES_H_
+#endif
