@@ -21,7 +21,7 @@ void ponerDado(int jugada){
 
 	if((jugada>1)&&(jugada<5)){
 
-
+contador=0;
 		    if (lamatriz[jugada - 1][0][0] != '\0')
 		        contador++;
 		    if (lamatriz[jugada + 1][0][0] != '\0')
@@ -159,7 +159,7 @@ if(contador<2){
 				}
 
 	if((jugada>21)&&(jugada<25)){
-
+contador=0;
 
 			    if (lamatriz[jugada - 1][0][0] != '\0')
 			        contador++;
@@ -233,7 +233,7 @@ if(contador<2){
 		}//termina
 
 	if((jugada==6)||(jugada==11)||(jugada==16)){ //comienza
-
+contador=0;
 
 				    if (lamatriz[jugada +5][0][0] != '\0')
 				        contador++;
@@ -306,7 +306,7 @@ if(contador<2){
 
 	if((jugada==10)||(jugada==15)||(jugada==20)){ //comienza
 
-
+contador=0;
 					    if (lamatriz[jugada +5][0][0] != '\0')
 					        contador++;
 					    if (lamatriz[jugada - 1][0][0] != '\0')
@@ -380,7 +380,7 @@ if(contador<2){
 		//este es el bloque denso, se pueden sumar de a 4 y de todas las direcciones, entonces lo que hago es
 		//almacenar en en array las posiciones donde se cumplio la condicion del if que vemos abajo para depues agarrar esos valores
 		//y sumar
-
+contador=0;
 
 					    if (lamatriz[jugada +5][0][0] != '\0'){
 					        arrayposiciones[contador]=jugada +5; //meto las posiciones donde se encontro un dado en el array en la posicion contador, esto para usar despues
