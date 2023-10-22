@@ -4,7 +4,7 @@
 
 
 int lamatriz[26][7][2];
-
+int posiocupada[1];
 //de quien es el turno inicial
 int turnoinicial;
 
