@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include "variables.h"
+// ARREGLAR EL IF DONDE ES SUMA INVALIDA PORQUE NO HAY UN ENTER
 
 extern int lamatriz[26][7][2];
 extern int posiocupada[1];
@@ -12,6 +12,88 @@ void dadoUno(int jugada) {
 void sumarDado(int suma,int jugada){
 	lamatriz[jugada][0][0] = suma;
 	lamatriz[jugada][suma][0] = 1;
+}
+void dadoMas(int invalido,int jugada,int dif){
+	int derecha = lamatriz[jugada + 1][0][0];
+	int abajo = lamatriz[jugada + 5][0][0];
+	int izquierda = lamatriz[jugada - 1][0][0];
+	int arriba = lamatriz[jugada - 5][0][0];
+	int vector[] = { izquierda, derecha, arriba, abajo, '\0' };
+	int suma = 0;
+	int resp = 0;
+	int comercantidad = 0;
+	int terminar = 0;
+	int ref[] = { -1, +1, -5, +5, '\0' };
+	if (!invalido) {
+		for(int i=0;i<4;i++){
+			if(vector[i]==invalido-1){
+				vector[i]=0;
+			}
+		}
+	}
+	printf(
+			"Existen mas de 2 dados adyacentes, puede elegir cuantos y cuales eliminar siempre y cuando su suma sea menor a 6\n");
+	enter();
+	suma = 0;
+	while (terminar == 0) {
+		while (!resp || resp > dif || resp == 1)
+			printf("Seleccione cuantos comer ");
+			scanf("%d", &resp);
+		limpiarBuffer();
+		comercantidad = resp;
+		resp = 0;
+		enter();
+		for (int i = 0; i < comercantidad;) {
+			printf(
+					"Seleccione (1) izquierda (2) derecha (3) arriba (4) abajo: ");
+			while (!resp) {
+				scanf("%d", &resp);
+				limpiarBuffer();
+				for (int j = 0; j < 4 && resp != 0; j++) {
+					if (vector[resp - 1] == 0) {
+						printf("La posicion seleccionada no tiene un dado \n");
+						resp = 0;
+					} else if (vector[resp - 1] == 6) {
+						printf(
+								"La posicion seleccionada tiene un dado de valor 6, semejante acto es invalido \n");
+						resp = 0;
+					}
+				}
+			}
+			printf("Posicion seleccionada %d \n", resp);
+			printf("Suma actual=%d, lo cual sera %d si decides sumar\n", suma,suma+vector[resp-1]);
+			printf("¿Aceptas la suma? (1) si (2) no :");
+			int temp = 0;
+			while (temp > 2 || temp < 1)
+				scanf("%d", &temp);
+			limpiarBuffer();
+			enter();
+			if (suma < 7) {
+				if (temp == 1) {
+					if (suma + vector[resp - 1] < 7) {
+						suma += vector[resp - 1];
+
+						lamatriz[jugada + ref[resp - 1]][0][0] = '\0';
+
+						i++;
+					} else {
+						printf(
+								"La posicion seleccionada otorga una suma invalida, secuencia reiniciada");
+						resp = 0;
+					}
+				} else {
+					printf("Secuencia reiniciada por negacion a la suma\n");
+					resp = 0;
+				}
+			} else {
+				printf("La suma actual es 6, cerrando secuencia");
+				comercantidad--;
+			}
+			resp = 0;
+		}
+		terminar++;
+	}
+	sumarDado(suma, jugada);
 }
 void ponerDadojugador(int jugada) {
 	//variables temporales de los valores de la
@@ -33,6 +115,9 @@ void ponerDadojugador(int jugada) {
 		suma = izquierda + derecha + arriba + abajo;
 		int j = 0;
 		for (int i = 0; i < 4; i++) {
+			if (vector[i] == 6) {
+				suma -= vector[i];
+			}
 			if (vector[i] != 0 && vector[i] != 6) {
 				dif++;
 				ubi[j] = ref[i];
@@ -40,86 +125,22 @@ void ponerDadojugador(int jugada) {
 			}
 		}
 		if (suma < 7 && dif == 2) {
-			sumarDado(suma,jugada);
+			sumarDado(suma, jugada);
 			for (int i = 0; i < dif; i++) {
 				lamatriz[jugada + ubi[i]][0][0] = '\0';
 			}
 		} else if (dif > 2) {
-			printf(
-					"Existen mas de 2 dados adyacentes, puede elegir cuantos y cuales eliminar siempre y cuando su suma sea menor a 6\n");
-			enter();
-			suma = 0;
-			while (terminar == 0) {
-				printf("Seleccione cuantos comer ");
-				while (!resp || resp > dif || resp == 1)
-					scanf("%d", &resp);
-				limpiarBuffer();
-				comercantidad = resp;
-				resp = 0;
-				for (int i = 0; i < comercantidad;) {
-					printf(
-							"Seleccione (1) izquierda (2) derecha (3) arriba (4) abajo: ");
-					while (!resp) {
-						scanf("%d", &resp);
-						limpiarBuffer();
-						for (int j = 0; j < 4 && resp != 0; j++) {
-							if (vector[resp - 1] == 0) {
-								printf(
-										"La posicion seleccionada no tiene un dado \n");
-								resp = 0;
-							} else if (vector[resp - 1] == 6) {
-								printf(
-										"La posicion seleccionada tiene un dado de valor 6, semejante acto es invalido \n");
-								resp = 0;
-							}
-						}
-					}
-					printf("Posicion seleccionada %d \n", resp);
-					printf("Suma actual=%d \n", suma + vector[resp - 1]);
-					printf("¿Aceptas la suma? (1) si (2) no :");
-					int temp = 0;
-					while (temp > 2 || temp < 1)
-						scanf("%d", &temp);
-					limpiarBuffer();
-					enter();
-					if (suma < 7) {
-						if (temp == 1) {
-							if (suma + vector[resp - 1] < 7) {
-								suma += vector[resp - 1];
-
-								lamatriz[jugada + ref[resp - 1]][0][0] = '\0';
-
-								i++;
-							} else {
-								printf(
-										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada\n");
-								resp = 0;
-							}
-						} else {
-							printf(
-									"Secuencia reiniciada por negacion a la suma\n");
-							resp = 0;
-						}
-					} else {
-						printf("La suma actual es 6, cerrando secuencia");
-						comercantidad--;
-					}
-					resp = 0;
-				}
-				terminar++;
-			}
-			sumarDado(suma,jugada);
+			int invalido = 0;
+			dadoMas(invalido, jugada, dif);
 		} else {
 			dadoUno(jugada);
 		}
 	}
 	//ESQUINAS INICIO
 	if (jugada == 1) {
-		abajo = lamatriz[jugada + 5][0][0];
-		derecha = lamatriz[jugada + 1][0][0];
 		suma = derecha + abajo;
 		if (derecha != 0 && abajo != 0 && suma < 7) {
-			sumarDado(suma,jugada);
+			sumarDado(suma, jugada);
 			lamatriz[jugada + 1][0][0] = '\0';
 			lamatriz[jugada + 5][0][0] = '\0';
 		} else {
@@ -128,14 +149,9 @@ void ponerDadojugador(int jugada) {
 
 	}
 	if (jugada == 5) {
-
-		abajo = lamatriz[jugada + 5][0][0];
-
-		izquierda = lamatriz[jugada - 1][0][0];
 		suma = izquierda + abajo;
-
 		if (izquierda != 0 && abajo != 0 && suma < 7) {
-			sumarDado(suma,jugada);
+			sumarDado(suma, jugada);
 			lamatriz[jugada - 1][0][0] = '\0';
 			lamatriz[jugada + 5][0][0] = '\0';
 		} else {
@@ -143,11 +159,9 @@ void ponerDadojugador(int jugada) {
 		}
 	}
 	if (jugada == 21) {
-		arriba = lamatriz[jugada - 5][0][0];
-		derecha = lamatriz[jugada + 1][0][0];
 		suma = derecha + arriba;
 		if (derecha != 0 && arriba != 0 && suma < 7) {
-			sumarDado(suma,jugada);
+			sumarDado(suma, jugada);
 			lamatriz[jugada + 1][0][0] = '\0';
 			lamatriz[jugada - 5][0][0] = '\0';
 		} else {
@@ -155,12 +169,9 @@ void ponerDadojugador(int jugada) {
 		}
 	}
 	if (jugada == 25) {
-		arriba = lamatriz[jugada - 5][0][0];
-		izquierda = lamatriz[jugada - 1][0][0];
 		suma = izquierda + arriba;
-
 		if (izquierda != 0 && arriba != 0 && suma < 7) {
-			sumarDado(suma,jugada);
+			sumarDado(suma, jugada);
 			lamatriz[jugada - 1][0][0] = '\0';
 			lamatriz[jugada - 5][0][0] = '\0';
 
@@ -169,177 +180,29 @@ void ponerDadojugador(int jugada) {
 		}
 	}
 	//ESQUINAS FIN
-	if (jugada == 2 || jugada == 3 || jugada == 4) {
-		suma = izquierda + abajo + derecha;
-		int j = 0;
-		for (int i = 0; i < 4; i++) {
-			if (vector[i] != 0 && vector[i] != arriba && vector[i] != 6) {
-				dif++;
-				ubi[j] = ref[i];
-				j++;
-			}
-		}
-		if (suma < 7 && dif == 2) {
-			sumarDado(suma,jugada);
-			for (int i = 0; i < dif; i++) {
-				lamatriz[jugada + ubi[i]][0][0] = '\0';
-			}
-		} else if (dif > 2) {
-			printf(
-					"Existen mas de 2 dados adyacentes, puede elegir cuantos y cuales eliminar siempre y cuando su suma sea menor a 6\n");
-			enter();
-			suma = 0;
-			arriba = 0;
-			while (terminar == 0) {
-				printf("Seleccione cuantos comer ");
-				while (!resp || resp > dif || resp == 1)
-					scanf("%d", &resp);
-				limpiarBuffer();
-				comercantidad = resp;
-				resp = 0;
-				for (int i = 0; i < comercantidad;) {
-					printf(
-							"Seleccione (1) izquierda (2) derecha (3) arriba (4) abajo: ");
-					while (!resp) {
-						scanf("%d", &resp);
-						limpiarBuffer();
-						for (int j = 0; j < 4 && resp != 0; j++) {
-							if (vector[resp - 1] == 0) {
-								printf(
-										"La posicion seleccionada no tiene un dado \n");
-								resp = 0;
-							} else if (vector[resp - 1] == 6) {
-								printf(
-										"La posicion seleccionada tiene un dado de valor 6, semejante acto es invalido \n");
-								resp = 0;
-							}
-						}
-					}
-					printf("Posicion seleccionada %d \n", resp);
-					printf("Suma actual=%d \n", suma + vector[resp - 1]);
-					printf("¿Aceptas la suma? (1) si (2) no :");
-					int temp = 0;
-					while (temp > 2 || temp < 1)
-						scanf("%d", &temp);
-					limpiarBuffer();
-					enter();
-					if (suma < 7) {
-						if (temp == 1) {
-							if (suma + vector[resp - 1] < 7) {
-								suma += vector[resp - 1];
-								lamatriz[jugada + ref[resp - 1]][0][0] = '\0';
-								i++;
-							} else {
-								printf(
-										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada\n");
-								resp = 0;
-							}
-						} else {
-							printf(
-									"Secuencia reiniciada por negacion a la suma\n");
-							resp = 0;
-						}
-					} else {
-						printf("La suma actual es 6, cerrando secuencia");
-						comercantidad--;
-					}
-					resp = 0;
-				}
-				terminar++;
-			}
-			sumarDado(suma,jugada);
-		} else {
-			dadoUno(jugada);
-		}
-	}
 
 	if (jugada == 6 || jugada == 11 || jugada == 16) {
 		suma = derecha + arriba + abajo;
 		int j = 0;
 		for (int i = 0; i < 4; i++) {
-			if (vector[i] != 0 && vector[i] != izquierda && vector[i] != 6) {
+			if (vector[i] == 6) {
+				suma -= vector[i];
+			}
+			if (vector[i] != 0 && i != 0 && vector[i] != 6) {
 				dif++;
 				ubi[j] = ref[i];
 				j++;
+
 			}
 		}
 		if (suma < 7 && dif == 2) {
-			sumarDado(suma,jugada);
+			sumarDado(suma, jugada);
 			for (int i = 0; i < dif; i++) {
 				lamatriz[jugada + ubi[i]][0][0] = '\0';
 			}
 		} else if (dif > 2) {
-			printf(
-					"Existen mas de 2 dados adyacentes, puede elegir cuantos y cuales eliminar siempre y cuando su suma sea menor a 6\n");
-			enter();
-			suma = 0;
-			izquierda = 0;
-			while (terminar == 0) {
-				printf("Seleccione cuantos comer ");
-				while (!resp || resp > dif || resp == 1)
-					scanf("%d", &resp);
-				limpiarBuffer();
-				comercantidad = resp;
-				resp = 0;
-				for (int i = 0; i < comercantidad;) {
-					printf(
-							"Seleccione (1) izquierda (2) derecha (3) arriba (4) abajo: ");
-					while (!resp) {
-						scanf("%d", &resp);
-						limpiarBuffer();
-						for (int j = 0; j < 4 && resp != 0; j++) {
-							if (vector[resp - 1] == 0) {
-								printf(
-										"La posicion seleccionada no tiene un dado \n");
-								resp = 0;
-							} else if (vector[resp - 1] == 6) {
-								printf(
-										"La posicion seleccionada tiene un dado de valor 6, semejante acto es invalido \n");
-								resp = 0;
-							}
-						}
-					}
-					printf("Posicion seleccionada %d \n", resp);
-					printf("Suma actual=%d \n", suma + vector[resp - 1]);
-					printf("¿Aceptas la suma? (1) si (2) no :");
-					int temp = 0;
-					while (temp > 2 || temp < 1)
-						scanf("%d", &temp);
-					limpiarBuffer();
-					enter();
-					if (suma < 7) {
-						if (temp == 1) {
-							if (suma + vector[resp - 1] < 7) {
-								suma += vector[resp - 1];
-
-								// a veces borra el de la derecha y el de la izquierda en vez de arriba
-
-								lamatriz[jugada + ref[resp - 1]][0][0] = '\0';
-
-								//vector[] = { izquierda, derecha, arriba, abajo, '\0' };
-								//ref[] = { -1, +1, -5, +5, '\0' };
-
-								i++;
-							} else {
-								printf(
-										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada\n");
-								resp = 0;
-							}
-						} else {
-							printf(
-									"Secuencia reiniciada por negacion a la suma\n");
-							resp = 0;
-						}
-					} else {
-						printf("La suma actual es 6, cerrando secuencia");
-						comercantidad--;
-					}
-					resp = 0;
-				}
-				terminar++;
-			}
-			lamatriz[jugada][0][0] = suma;
-			lamatriz[jugada][suma][0] = 1;
+			int invalido = 1;
+			dadoMas(invalido, jugada, dif);
 		} else {
 			dadoUno(jugada);
 		}
@@ -348,181 +211,74 @@ void ponerDadojugador(int jugada) {
 		suma = izquierda + arriba + abajo;
 		int j = 0;
 		for (int i = 0; i < 4; i++) {
-			if (vector[i] != 0 && vector[i] != derecha && vector[i] != 6) {
+			if (vector[i] == 6) {
+				suma -= vector[i];
+			}
+			if (vector[i] != 0 && i != 1 && vector[i] != 6) {
 				dif++;
 				ubi[j] = ref[i];
 				j++;
 			}
 		}
 		if (suma < 7 && dif == 2) {
-			sumarDado(suma,jugada);
+			sumarDado(suma, jugada);
 			for (int i = 0; i < dif; i++) {
 				lamatriz[jugada + ubi[i]][0][0] = '\0';
 			}
 		} else if (dif > 2) {
-			printf(
-					"Existen mas de 2 dados adyacentes, puede elegir cuantos y cuales eliminar siempre y cuando su suma sea menor a 6\n");
-			enter();
-			suma = 0;
-			derecha = 0;
-			while (terminar == 0) {
-				printf("Seleccione cuantos comer ");
-				while (!resp || resp > dif || resp == 1)
-					scanf("%d", &resp);
-				limpiarBuffer();
-				comercantidad = resp;
-				resp = 0;
-				for (int i = 0; i < comercantidad;) {
-					printf(
-							"Seleccione (1) izquierda (2) derecha (3) arriba (4) abajo: ");
-					while (!resp) {
-						scanf("%d", &resp);
-						limpiarBuffer();
-						for (int j = 0; j < 4 && resp != 0; j++) {
-							if (vector[resp - 1] == 0) {
-								printf(
-										"La posicion seleccionada no tiene un dado \n");
-								resp = 0;
-							} else if (vector[resp - 1] == 6) {
-								printf(
-										"La posicion seleccionada tiene un dado de valor 6, semejante acto es invalido \n");
-								resp = 0;
-							}
-						}
-					}
-					printf("Posicion seleccionada %d \n", resp);
-					printf("Suma actual=%d \n", suma + vector[resp - 1]);
-					printf("¿Aceptas la suma? (1) si (2) no :");
-					int temp = 0;
-					while (temp > 2 || temp < 1)
-						scanf("%d", &temp);
-					limpiarBuffer();
-					enter();
-					if (suma < 7) {
-						if (temp == 1) {
-							if (suma + vector[resp - 1] < 7) {
-								suma += vector[resp - 1];
-
-								// a veces borra el de la derecha y el de la izquierda en vez de arriba
-
-								lamatriz[jugada + ref[resp - 1]][0][0] = '\0';
-
-								//vector[] = { izquierda, derecha, arriba, abajo, '\0' };
-								//ref[] = { -1, +1, -5, +5, '\0' };
-
-								i++;
-							} else {
-								printf(
-										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada\n");
-								resp = 0;
-							}
-						} else {
-							printf(
-									"Secuencia reiniciada por negacion a la suma\n");
-							resp = 0;
-						}
-					} else {
-						printf("La suma actual es 6, cerrando secuencia");
-						comercantidad--;
-					}
-					resp = 0;
-				}
-				terminar++;
-			}
-			sumarDado(suma,jugada);
+			int invalido = 2;
+			dadoMas(invalido, jugada, dif);
 		} else {
 			dadoUno(jugada);
 		}
 	}
-
+	if (jugada == 2 || jugada == 3 || jugada == 4) {
+		suma = izquierda + abajo + derecha;
+		int j = 0;
+		for (int i = 0; i < 4; i++) {
+			if (vector[i] == 6) {
+				suma -= vector[i];
+			}
+			if (vector[i] != 0 && i != 2 && vector[i] != 6) {
+				dif++;
+				ubi[j] = ref[i];
+				j++;
+			}
+		}
+		if (suma < 7 && dif == 2) {
+			sumarDado(suma, jugada);
+			for (int i = 0; i < dif; i++) {
+				lamatriz[jugada + ubi[i]][0][0] = '\0';
+			}
+		} else if (dif > 2) {
+			int invalido = 3;
+			dadoMas(invalido, jugada, dif);
+		} else {
+			dadoUno(jugada);
+		}
+	}
 	if (jugada > 21 && jugada < 25) {
 		suma = izquierda + arriba + derecha;
 
 		int j = 0;
 		for (int i = 0; i < 4; i++) {
-			if (vector[i] != 0 && vector[i] != abajo && vector[i] != 6) {
+			if (vector[i] == 6) {
+				suma -= vector[i];
+			}
+			if (vector[i] != 0 && i != 3 && vector[i] != 6) {
 				dif++;
 				ubi[j] = ref[i];
 				j++;
 			}
 		}
 		if (suma < 7 && dif == 2) {
-			sumarDado(suma,jugada);
+			sumarDado(suma, jugada);
 			for (int i = 0; i < dif; i++) {
 				lamatriz[jugada + ubi[i]][0][0] = '\0';
 			}
 		} else if (dif > 2) {
-			abajo = 0;
-			printf(
-					"Existen mas de 2 dados adyacentes, puede elegir cuantos y cuales eliminar siempre y cuando su suma sea menor a 6\n");
-			enter();
-			suma = 0;
-			derecha = 0;
-			while (terminar == 0) {
-				printf("Seleccione cuantos comer ");
-				while (!resp || resp > dif || resp == 1)
-					scanf("%d", &resp);
-				limpiarBuffer();
-				comercantidad = resp;
-				resp = 0;
-				for (int i = 0; i < comercantidad;) {
-					printf(
-							"Seleccione (1) izquierda (2) derecha (3) arriba (4) abajo: ");
-					while (!resp) {
-						scanf("%d", &resp);
-						limpiarBuffer();
-						for (int j = 0; j < 4 && resp != 0; j++) {
-							if (vector[resp - 1] == 0) {
-								printf(
-										"La posicion seleccionada no tiene un dado \n");
-								resp = 0;
-							} else if (vector[resp - 1] == 6) {
-								printf(
-										"La posicion seleccionada tiene un dado de valor 6, semejante acto es invalido \n");
-								resp = 0;
-							}
-						}
-					}
-					printf("Posicion seleccionada %d \n", resp);
-					printf("Suma actual=%d \n", suma + vector[resp - 1]);
-					printf("¿Aceptas la suma? (1) si (2) no :");
-					int temp = 0;
-					while (temp > 2 || temp < 1)
-						scanf("%d", &temp);
-					limpiarBuffer();
-					enter();
-					if (suma < 7) {
-						if (temp == 1) {
-							if (suma + vector[resp - 1] < 7) {
-								suma += vector[resp - 1];
-
-								// a veces borra el de la derecha y el de la izquierda en vez de arriba
-
-								lamatriz[jugada + ref[resp - 1]][0][0] = '\0';
-
-								//vector[] = { izquierda, derecha, arriba, abajo, '\0' };
-								//ref[] = { -1, +1, -5, +5, '\0' };
-
-								i++;
-							} else {
-								printf(
-										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada\n");
-								resp = 0;
-							}
-						} else {
-							printf(
-									"Secuencia reiniciada por negacion a la suma\n");
-							resp = 0;
-						}
-					} else {
-						printf("La suma actual es 6, cerrando secuencia");
-						comercantidad--;
-					}
-					resp = 0;
-				}
-				terminar++;
-			}
-			sumarDado(suma,jugada);
+			int invalido = 4;
+			dadoMas(invalido, jugada, dif);
 		} else {
 			dadoUno(jugada);
 		}
