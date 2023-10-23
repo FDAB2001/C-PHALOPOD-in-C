@@ -5,7 +5,6 @@
 #include "computadora.h"
 #include <stdint.h>
 
-
 typedef enum
 {
 	ROJO,
