@@ -92,7 +92,7 @@ void ponerDadojugador(int jugada) {
 								i++;
 							} else {
 								printf(
-										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada");
+										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada\n");
 								resp = 0;
 							}
 						} else {
@@ -231,7 +231,7 @@ void ponerDadojugador(int jugada) {
 								i++;
 							} else {
 								printf(
-										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada");
+										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada\n");
 								resp = 0;
 							}
 						} else {
@@ -322,7 +322,7 @@ void ponerDadojugador(int jugada) {
 								i++;
 							} else {
 								printf(
-										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada");
+										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada\n");
 								resp = 0;
 							}
 						} else {
@@ -413,7 +413,7 @@ void ponerDadojugador(int jugada) {
 								i++;
 							} else {
 								printf(
-										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada");
+										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada\n");
 								resp = 0;
 							}
 						} else {
@@ -506,7 +506,7 @@ void ponerDadojugador(int jugada) {
 								i++;
 							} else {
 								printf(
-										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada");
+										"La posicion seleccionada otorga una suma invalida, secuencia reiniciada\n");
 								resp = 0;
 							}
 						} else {
