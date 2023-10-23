@@ -35,9 +35,10 @@ void dadoMas(int invalido,int jugada,int dif){
 	enter();
 	suma = 0;
 	while (terminar == 0) {
-		while (!resp || resp > dif || resp == 1)
+		while (!resp || resp > dif || resp == 1){
 			printf("Seleccione cuantos comer ");
 			scanf("%d", &resp);
+		}
 		limpiarBuffer();
 		comercantidad = resp;
 		resp = 0;
