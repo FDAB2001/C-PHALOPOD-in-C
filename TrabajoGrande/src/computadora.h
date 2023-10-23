@@ -9,5 +9,5 @@
 #define COMPUTADORA_H_
 
 int computadora(int);
-
+void ponerDado(int);
 #endif /* COMPUTADORA_H_ */
