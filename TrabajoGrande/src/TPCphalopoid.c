@@ -37,6 +37,7 @@ int main()
     turnoinicial = verificarTurno()-1;
     tablaPosiciones();
     imprimirMatriz();
+	printf("Si el valor esta esta encerrado entre (parentesis), el dado es del jugador\nY si esta esta encerrado entre [corchetes], el dado es de la computadora");
             if (turnoinicial == 0)
                 turno=jugador(turno);
 
