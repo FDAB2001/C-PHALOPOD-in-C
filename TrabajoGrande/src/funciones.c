@@ -17,7 +17,7 @@ void imprimirMatriz()
     for (int i = 1; i < 26; i++)
     {
         if (lamatriz[i][0][0] != 0){
-            for(int j=0;j<6;j++){
+            for(int j=0;j<7;j++){
             	if(lamatriz[i][0][0]==j){
             		if(lamatriz[i][j][0]==1){
             			printf("(%d)",lamatriz[i][0][0]);
