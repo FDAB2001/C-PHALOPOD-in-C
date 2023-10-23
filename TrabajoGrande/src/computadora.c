@@ -225,9 +225,9 @@ contador=0;
 				contador=0;
 				return;
 
-			}else{
-				printf("La compu no quiso sumar todos los dados");
 			}
+
+
 
 		}//termina
 
@@ -462,7 +462,7 @@ contador=0;
 							lamatriz[jugada][suma][0]=2;
 
 							lamatriz[jugada+1][0][0]=0;
-							lamatriz[jugada-5][0][0]=0;//suma lo que hay a su derecha y lo que hay a su izquierda
+							lamatriz[jugada-1][0][0]=0;//suma lo que hay a su derecha y lo que hay a su izquierda
 						}
 
 
@@ -682,7 +682,7 @@ int computadora(turno){
 		}
 
 		if(posiocupada[1]==5){
-					if(lamatriz[2][0][0]=='\0'){
+					if(lamatriz[4][0][0]=='\0'){
 						lamatriz[4][0][0]=1;
 						ponerDado(4);
 
@@ -690,7 +690,7 @@ int computadora(turno){
 					}
 
 
-						if(lamatriz[6][0][0]=='\0'){
+						if(lamatriz[10][0][0]=='\0'){
 							lamatriz[10][0][0]=1;
 							ponerDado(10);
 							return(turno);
@@ -699,18 +699,19 @@ int computadora(turno){
 
 					}
 
-		printf("\n vale pene 123 \n");
+		//ya si ningun if se cumple, se crea un numero aleatorio que debe cumplir que no sea cero y que la posicion de este numero
+		//random debe estar vacio
+		printf("vale pene 123 \n");
 		srand(time(NULL));
 		int numerorandom = rand() % 25 + 1;
-		
-		while(lamatriz[numerorandom][0][0]=='\0' || numerorandom==0){
+
+		while(lamatriz[numerorandom][0][0]!='\0' || numerorandom==0){
 			srand(time(NULL));
 			numerorandom = rand() % 25 + 1;
-			while(numerorandom==0){numerorandom = rand() % 25 + 1;}
-			lamatriz[numerorandom][0][0]=1;
 			printf("\n vale peneeeeeeeee \n");
 		}
 		lamatriz[numerorandom][0][0]=1;
+
 		ponerDado(numerorandom);
 
 		return(turno);
