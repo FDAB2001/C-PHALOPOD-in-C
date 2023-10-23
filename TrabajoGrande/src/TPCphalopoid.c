@@ -11,7 +11,7 @@ void verificarGanador(int *turno){
 	int AI=0;
 	for(int i=1;i<26;i++){
 		for(int j=1;j<7;j++){
-			 if(lamatriz[i][0]==j){
+			 if(lamatriz[i][0][0]==j){
 				 if(lamatriz[i][j][0]==1){
 					 jug++;
 					 cont++;
@@ -27,6 +27,8 @@ void verificarGanador(int *turno){
 			printf("Gana el jugador");
 		else printf("Gana LA MAQUINARIA");
 	}
+
+
 }
 int main()
 {
@@ -35,18 +37,19 @@ int main()
     turnoinicial = verificarTurno();
     tablaPosiciones();
     imprimirMatriz();
+    //PONER WHILE TURNO INICIAL
             if (turnoinicial == 1)
                 turno=jugador(turno);
 
             else//aca tiene que estar la compu
-            	turno=computadora(turno);
+            	turno=jugador(turno);
     while (turno != 0)
     { 	printf("Tablero actual: \n");
 		imprimirMatriz();
         if (turno==1)
         	turno=jugador(turno);
         else //aca tiene que estar la compu
-        	turno=computadora(turno);
+        	turno=jugador(turno);
         verificarGanador(&turno);
     }
     enter();
