@@ -527,14 +527,13 @@ int computadora(turno){
 
 	turno=1;
 
-	if(turnoinicial==2){
+	if(turnoinicial==0){
 
 		srand(time(NULL));
 		int numerorandom = rand() % 26;
 		lamatriz[numerorandom][0][0]=1;
 		printf("\n numero random %d",numerorandom);
 		printf("\n posicion %d",lamatriz[numerorandom][0][0]);
-		turnoinicial=1;
 		return(turno); //en el caso de que el usuario quiera que la compu comience, tira uno random
 	}else{
 		//yo no sabia que podia ser simplemente random la posicion que elegia la compu, entonces su funcionamiento, que es de lo mas
