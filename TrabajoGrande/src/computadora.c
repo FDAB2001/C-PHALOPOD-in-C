@@ -518,6 +518,7 @@ contador=0;
 
 
 				}//termina
+lamatriz[jugada][1][0]=2;
 
 return;
 
