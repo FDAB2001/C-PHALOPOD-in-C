@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-// ARREGLAR EL IF DONDE ES SUMA INVALIDA PORQUE NO HAY UN ENTER
 
 extern int lamatriz[26][7][2];
 extern int posiocupada[1];
@@ -96,7 +95,6 @@ void dadoMas(int invalido,int jugada,int dif){
 	sumarDado(suma, jugada);
 }
 void ponerDadojugador(int jugada) {
-	//variables temporales de los valores de la
 	int derecha = lamatriz[jugada + 1][0][0];
 	int abajo = lamatriz[jugada + 5][0][0];
 	int izquierda = lamatriz[jugada - 1][0][0];
@@ -131,7 +129,6 @@ void ponerDadojugador(int jugada) {
 			}
 		} else if (dif > 2) {
 			int invalido = 0;
-			dadoMas(invalido, jugada, dif);
 		} else {
 			dadoUno(jugada);
 		}
@@ -192,7 +189,6 @@ void ponerDadojugador(int jugada) {
 				dif++;
 				ubi[j] = ref[i];
 				j++;
-
 			}
 		}
 		if (suma < 7 && dif == 2) {
@@ -202,7 +198,6 @@ void ponerDadojugador(int jugada) {
 			}
 		} else if (dif > 2) {
 			int invalido = 1;
-			dadoMas(invalido, jugada, dif);
 		} else {
 			dadoUno(jugada);
 		}
@@ -227,7 +222,6 @@ void ponerDadojugador(int jugada) {
 			}
 		} else if (dif > 2) {
 			int invalido = 2;
-			dadoMas(invalido, jugada, dif);
 		} else {
 			dadoUno(jugada);
 		}
@@ -252,7 +246,6 @@ void ponerDadojugador(int jugada) {
 			}
 		} else if (dif > 2) {
 			int invalido = 3;
-			dadoMas(invalido, jugada, dif);
 		} else {
 			dadoUno(jugada);
 		}
@@ -278,7 +271,6 @@ void ponerDadojugador(int jugada) {
 			}
 		} else if (dif > 2) {
 			int invalido = 4;
-			dadoMas(invalido, jugada, dif);
 		} else {
 			dadoUno(jugada);
 		}
@@ -286,7 +278,6 @@ void ponerDadojugador(int jugada) {
 	}
 }
 
-//valida algunas cosas de la jugada del jugador
 int validarJugada() {
 	int posicion = 0;
 	while ((posicion < 1 || posicion > 25)) {
@@ -302,7 +293,7 @@ int validarJugada() {
 	}
 	return posicion;
 }
-//aca se maneja lo que tenga que ver con el jugador
+
 int jugador(int turno) {
 
 	printf("Seleccione en que casilla del 1 al 25 para poner el dado\n");
