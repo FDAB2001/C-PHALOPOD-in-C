@@ -5,40 +5,21 @@
 #include "computadora.h"
 #include <stdint.h>
 
-typedef enum
-{
-	ROJO,
-	VERDE
-}color;
-
-typedef struct
-{
-	uint8_t valorDado;//NUmero del 1 al 6
-	color colorDado; //color del dado
-
-}casilla;
-
-casilla tablero[5][5];
-
-
-
-void sumarCostado(int posicion){
-
-}
-
 void verificarGanador(int *turno){
 	int cont=0;
 	int jug=0;
 	int AI=0;
 	for(int i=1;i<26;i++){
 		for(int j=1;j<7;j++){
-			if(lamatriz[i][j][0]=='1'){
-				jug++;
-				cont++;
-			}else if(lamatriz[i][j][0]=='2'){
-				AI++;
-				cont++;
-			}
+			 if(lamatriz[i][0]==j){
+				 if(lamatriz[i][j][0]==1){
+					 jug++;
+					 cont++;
+				 }else if(lamatriz[i][j][0]==2){
+					 AI++;
+					 cont++;
+				 }
+			 }
 		}
 	}if(cont==25){
 		*turno=0;
@@ -46,8 +27,6 @@ void verificarGanador(int *turno){
 			printf("Gana el jugador");
 		else printf("Gana LA MAQUINARIA");
 	}
-
-
 }
 int main()
 {
