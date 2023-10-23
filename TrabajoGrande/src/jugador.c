@@ -129,6 +129,7 @@ void ponerDadojugador(int jugada) {
 			}
 		} else if (dif > 2) {
 			int invalido = 0;
+			dadoMas(invalido,jugada,dif);
 		} else {
 			dadoUno(jugada);
 		}
@@ -198,6 +199,7 @@ void ponerDadojugador(int jugada) {
 			}
 		} else if (dif > 2) {
 			int invalido = 1;
+			dadoMas(invalido,jugada,dif);
 		} else {
 			dadoUno(jugada);
 		}
@@ -222,6 +224,7 @@ void ponerDadojugador(int jugada) {
 			}
 		} else if (dif > 2) {
 			int invalido = 2;
+			dadoMas(invalido,jugada,dif);
 		} else {
 			dadoUno(jugada);
 		}
@@ -246,6 +249,7 @@ void ponerDadojugador(int jugada) {
 			}
 		} else if (dif > 2) {
 			int invalido = 3;
+			dadoMas(invalido,jugada,dif);
 		} else {
 			dadoUno(jugada);
 		}
@@ -271,6 +275,7 @@ void ponerDadojugador(int jugada) {
 			}
 		} else if (dif > 2) {
 			int invalido = 4;
+			dadoMas(invalido,jugada,dif);
 		} else {
 			dadoUno(jugada);
 		}
