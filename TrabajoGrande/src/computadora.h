@@ -8,6 +8,6 @@
 #ifndef COMPUTADORA_H_
 #define COMPUTADORA_H_
 
-void computadora();
+int computadora(int);
 
 #endif /* COMPUTADORA_H_ */
