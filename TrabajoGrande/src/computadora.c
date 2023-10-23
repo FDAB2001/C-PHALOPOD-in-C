@@ -21,11 +21,11 @@ void ponerDado(int jugada){
 	if((jugada>1)&&(jugada<5)){
 
 contador=0;
-		    if (lamatriz[jugada - 1][0][0] != '\0')
+		    if (lamatriz[jugada - 1][0][0] != '\0' && lamatriz[jugada - 1][0][0] !=6)
 		        contador++;
-		    if (lamatriz[jugada + 1][0][0] != '\0')
+		    if (lamatriz[jugada + 1][0][0] != '\0'&& lamatriz[jugada + 1][0][0] !=6)
 		        contador++;
-		     if (lamatriz[jugada + 5][0][0] != '\0')
+		     if (lamatriz[jugada + 5][0][0] != '\0' && lamatriz[jugada+5][0][0] !=6)
 		        contador++;
 //aca lo que hace el contador es contar las veces que encunetra que en una posicion no esta vacio, osea, hay un dado
 //primero a la izquierda, depues a la derecha y despues abajo del dado
@@ -160,11 +160,11 @@ if(contador<2){
 	if((jugada>21)&&(jugada<25)){
 contador=0;
 
-			    if (lamatriz[jugada - 1][0][0] != '\0')
+			    if (lamatriz[jugada - 1][0][0] != '\0' && lamatriz[jugada - 1][0][0] !=6)
 			        contador++;
-			    if (lamatriz[jugada + 1][0][0] != '\0')
+			    if (lamatriz[jugada + 1][0][0] != '\0' && lamatriz[jugada + 1][0][0] !=6)
 			        contador++;
-			     if (lamatriz[jugada - 5][0][0] != '\0')
+			     if (lamatriz[jugada - 5][0][0] != '\0' && lamatriz[jugada - 5][0][0] !=6)
 			        contador++;
 
 
@@ -234,11 +234,11 @@ contador=0;
 	if((jugada==6)||(jugada==11)||(jugada==16)){ //comienza
 contador=0;
 
-				    if (lamatriz[jugada +5][0][0] != '\0')
+				    if (lamatriz[jugada +5][0][0] != '\0' && lamatriz[jugada+5][0][0] !=6)
 				        contador++;
-				    if (lamatriz[jugada + 1][0][0] != '\0')
+				    if (lamatriz[jugada + 1][0][0] != '\0' && lamatriz[jugada + 1][0][0] !=6)
 				        contador++;
-				     if (lamatriz[jugada - 5][0][0] != '\0')
+				     if (lamatriz[jugada - 5][0][0] != '\0' && lamatriz[jugada - 5][0][0] !=6)
 				        contador++;
 
 
@@ -306,11 +306,11 @@ contador=0;
 	if((jugada==10)||(jugada==15)||(jugada==20)){ //comienza
 
 contador=0;
-					    if (lamatriz[jugada +5][0][0] != '\0')
+					    if (lamatriz[jugada +5][0][0] != '\0' && lamatriz[jugada +5][0][0] !=6)
 					        contador++;
-					    if (lamatriz[jugada - 1][0][0] != '\0')
+					    if (lamatriz[jugada - 1][0][0] != '\0' && lamatriz[jugada - 1][0][0] !=6)
 					        contador++;
-					     if (lamatriz[jugada - 5][0][0] != '\0')
+					     if (lamatriz[jugada - 5][0][0] != '\0' && lamatriz[jugada - 5][0][0] !=6)
 					        contador++;
 
 
@@ -381,19 +381,19 @@ contador=0;
 		//y sumar
 contador=0;
 
-					    if (lamatriz[jugada +5][0][0] != '\0'){
+					    if (lamatriz[jugada +5][0][0] != '\0' && lamatriz[jugada +5][0][0]!=6){
 					        arrayposiciones[contador]=jugada +5; //meto las posiciones donde se encontro un dado en el array en la posicion contador, esto para usar despues
 					    	contador++;
 					    }
-					    if (lamatriz[jugada + 1][0][0] != '\0'){
+					    if (lamatriz[jugada + 1][0][0] != '\0' && lamatriz[jugada + 1][0][0]!=6){
 					    	arrayposiciones[contador]=jugada +1;
 					    	contador++;
 					    }
-					     if (lamatriz[jugada - 5][0][0] != '\0'){
+					     if (lamatriz[jugada - 5][0][0] != '\0' && lamatriz[jugada - 5][0][0]!=6){
 					    	 arrayposiciones[contador]=jugada -5;
 					    	 contador++;
 					     }
-					     if (lamatriz[jugada -1][0][0] != '\0'){
+					     if (lamatriz[jugada -1][0][0] != '\0' && lamatriz[jugada - 1][0][0]!=6){
 					    	 arrayposiciones[contador]=jugada -1;
 					    	 contador++;
 					     }
