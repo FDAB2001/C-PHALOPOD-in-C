@@ -34,11 +34,10 @@ int main()
 {
     int turno = 0;
     printf("Seleccione quien juega primero \n 1 para jugador primero \n 2 para la computadora primero \n");
-    turnoinicial = verificarTurno();
+    turnoinicial = verificarTurno()-1;
     tablaPosiciones();
     imprimirMatriz();
-    //PONER WHILE TURNO INICIAL
-            if (turnoinicial == 1)
+            if (turnoinicial == 0)
                 turno=jugador(turno);
 
             else//aca tiene que estar la compu
@@ -46,11 +45,13 @@ int main()
     while (turno != 0)
     { 	printf("Tablero actual: \n");
 		imprimirMatriz();
-        if (turno==1)
+        if (turno==1){
         	turno=jugador(turno);
-        else //aca tiene que estar la compu
+        }
+        else{ //aca tiene que estar la compu
         	turno=computadora(turno);
         verificarGanador(&turno);
+        }
     }
     enter();
     printf("fin");
