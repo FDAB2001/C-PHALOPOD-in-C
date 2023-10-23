@@ -9,8 +9,7 @@ int arrayposiciones[4]; //array con las posiciones con dados alrededor de donde 
 
 
 void ponerDado(int jugada){
-	//printf("Jgada vale %d\n",jugada);
-	printf("jugada vale %d\n",jugada);
+	
 
 	//en esta funcion, lo que pasa es que recibe el parametro de la posicion donde la compu eligio poner su dado,
 	//y lo que hace la funcion es revisar si se puede sumar algo, y lo hace dividiendo en secciones:
@@ -30,7 +29,7 @@ contador=0;
 //aca lo que hace el contador es contar las veces que encunetra que en una posicion no esta vacio, osea, hay un dado
 //primero a la izquierda, depues a la derecha y despues abajo del dado
 
-		printf("contador vale %d\n",contador);
+		
 
 if(contador<2){
 	lamatriz[jugada][1][0]=2;
@@ -168,7 +167,7 @@ contador=0;
 			        contador++;
 
 
-			printf("contador vale %d\n",contador);
+			
 
 
 
@@ -242,7 +241,7 @@ contador=0;
 				        contador++;
 
 
-				printf("contador vale %d\n",contador);
+				
 
 
 
@@ -314,7 +313,7 @@ contador=0;
 					        contador++;
 
 
-					printf("contador vale %d\n",contador);
+					
 
 
 
@@ -400,7 +399,7 @@ contador=0;
 
 
 
-					printf("contador vale %d\n",contador);
+					
 
 
 
@@ -532,8 +531,8 @@ int computadora(turno){
 		srand(time(NULL));
 		int numerorandom = rand() % 26;
 		lamatriz[numerorandom][0][0]=1;
-		printf("\n numero random %d",numerorandom);
-		printf("\n posicion %d",lamatriz[numerorandom][0][0]);
+		
+		
 		return(turno); //en el caso de que el usuario quiera que la compu comience, tira uno random
 	}else{
 		//yo no sabia que podia ser simplemente random la posicion que elegia la compu, entonces su funcionamiento, que es de lo mas
@@ -700,14 +699,14 @@ int computadora(turno){
 
 		//ya si ningun if se cumple, se crea un numero aleatorio que debe cumplir que no sea cero y que la posicion de este numero
 		//random debe estar vacio
-		printf("vale pene 123 \n");
+		
 		srand(time(NULL));
 		int numerorandom = rand() % 25 + 1;
 
 		while(lamatriz[numerorandom][0][0]!='\0' || numerorandom==0){
 			srand(time(NULL));
 			numerorandom = rand() % 25 + 1;
-			printf("\n vale peneeeeeeeee \n");
+			
 		}
 		lamatriz[numerorandom][0][0]=1;
 
