@@ -7,7 +7,6 @@ void limpiarBuffer(){
 }
 
 //Funcion que agrega un enter a la consola
-
 void enter(){
     printf("\n");
 }
