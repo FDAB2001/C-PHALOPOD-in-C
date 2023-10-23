@@ -699,18 +699,18 @@ int computadora(turno){
 
 					}
 
-		printf("\n vale pene \n");
+		printf("\n vale pene 123 \n");
 		srand(time(NULL));
 		int numerorandom = rand() % 25 + 1;
-		while(numerorandom==0){numerorandom = rand() % 25 + 1;}
-		lamatriz[numerorandom][0][0]=1;
-		while(lamatriz[numerorandom][0][0]=='\0'){
+		
+		while(lamatriz[numerorandom][0][0]=='\0' || numerorandom==0){
 			srand(time(NULL));
 			numerorandom = rand() % 25 + 1;
 			while(numerorandom==0){numerorandom = rand() % 25 + 1;}
 			lamatriz[numerorandom][0][0]=1;
-			printf("\n vale pene \n");
+			printf("\n vale peneeeeeeeee \n");
 		}
+		lamatriz[numerorandom][0][0]=1;
 		ponerDado(numerorandom);
 
 		return(turno);
