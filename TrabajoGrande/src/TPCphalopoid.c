@@ -42,14 +42,14 @@ int main()
                 turno=jugador(turno);
 
             else//aca tiene que estar la compu
-            	turno=jugador(turno);
+            	turno=computadora(turno);
     while (turno != 0)
     { 	printf("Tablero actual: \n");
 		imprimirMatriz();
         if (turno==1)
         	turno=jugador(turno);
         else //aca tiene que estar la compu
-        	turno=jugador(turno);
+        	turno=computadora(turno);
         verificarGanador(&turno);
     }
     enter();
