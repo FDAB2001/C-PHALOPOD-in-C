@@ -254,7 +254,7 @@ void verificarjugada(int jugada) {
 		computadora(1);
 	}
 }
-void actualizar_GTK() {
+void actualizar_GTK() { //como dice la funcion, el GTK "mira" la matriz y se actualiza en torno a ella
 	for (int i = 1; i < 26; ++i) {
 		int valor = lamatriz[i][0][0];
 		char buffer[20];
@@ -458,11 +458,10 @@ void actualizar_GTK() {
 	}
 }
 
-void PRESIONADO(GtkWidget *widget, gpointer data) {
+void PRESIONADO(GtkWidget *widget, gpointer data) {//funcion que se llama al presionar cualquier boton
 
 	jugadaGTK = GPOINTER_TO_INT(data);
 	verificarjugada(jugadaGTK);
-	//computadora(1);//ojo con el 1, solo por esta entrega ponemos eso ahi
 	g_print("\n");
 	imprimir_matriz();
 	actualizar_GTK();
