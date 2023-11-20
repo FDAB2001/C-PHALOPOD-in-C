@@ -13,3 +13,4 @@ void decirparente();
 int numeroAleatorio(int,int);
 
 #endif /* FUNCIONES_H_ */
+
