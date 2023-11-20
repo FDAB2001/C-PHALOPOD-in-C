@@ -95,32 +95,6 @@ void declarar_widgets() {
 	BOTON23 = GET_WIDGET(constructor, "menu_tablero_boton_23");
 	BOTON24 = GET_WIDGET(constructor, "menu_tablero_boton_24");
 	BOTON25 = GET_WIDGET(constructor, "menu_tablero_boton_25");
-	vector[1]=BOTON1;
-	vector[2]=BOTON1;
-	vector[3]=BOTON1;
-	vector[4]=BOTON1;
-	vector[5]=BOTON1;
-	vector[6]=BOTON1;
-	vector[7]=BOTON1;
-	vector[8]=BOTON1;
-	vector[9]=BOTON1;
-	vector[10]=BOTON1;
-	vector[11]=BOTON1;
-	vector[12]=BOTON1;
-	vector[13]=BOTON1;
-	vector[14]=BOTON1;
-	vector[15]=BOTON1;
-	vector[16]=BOTON1;
-	vector[17]=BOTON1;
-	vector[18]=BOTON1;
-	vector[19]=BOTON1;
-	vector[20]=BOTON1;
-	vector[21]=BOTON1;
-	vector[22]=BOTON1;
-	vector[23]=BOTON1;
-	vector[24]=BOTON1;
-	vector[25]=BOTON1;
-
 }
 
 //1 jcj 2 jcia 3 iacia
