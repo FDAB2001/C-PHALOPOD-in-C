@@ -2,15 +2,26 @@
 #include <stdlib.h>
 
 extern int lamatriz[26][7][2];
-extern int posiocupada[1];
+extern int decisiontomada;
 
+void dadojugador(int pos, int sumas) { //funcion que sirve para poder identificar a los dados de la compu
+	if (decisiontomada == 1) {
+		lamatriz[pos][sumas][0] = 1; //la compu se identificara por corchete
+	}
+
+	if (decisiontomada == 2) {
+		lamatriz[pos][sumas][0] = 2; //la compu se identificara por parentesis
+	}
+
+
+}
 void dadoUno(int jugada) {
 	lamatriz[jugada][0][0] = 1;
-	lamatriz[jugada][1][0] = 1;
+	dadojugador(jugada,1);
 }
 void sumarDado(int suma,int jugada){
 	lamatriz[jugada][0][0] = suma;
-	lamatriz[jugada][suma][0] = 1;
+	dadojugador(jugada,suma);
 }
 void dadoMas(int invalido,int jugada,int dif){
 	int derecha = lamatriz[jugada + 1][0][0];
@@ -102,9 +113,6 @@ void ponerDadojugador(int jugada) {
 	int arriba = lamatriz[jugada - 5][0][0];
 	int vector[] = { izquierda, derecha, arriba, abajo, '\0' };
 	int suma = 0;
-	int resp = 0;
-	int comercantidad = 0;
-	int terminar = 0;
 	int ref[] = { -1, +1, -5, +5, '\0' };
 	int dif = 0;
 	int ubi[4];
@@ -285,6 +293,7 @@ void ponerDadojugador(int jugada) {
 }
 
 int validarJugada() {
+
 	int posicion = 0;
 	while ((posicion < 1 || posicion > 25)) {
 		printf("Seleccione una posicion: ");
@@ -302,10 +311,11 @@ int validarJugada() {
 
 int jugador(int turno) {
 
+
 	printf("Seleccione en que casilla del 1 al 25 para poner el dado\n");
 
 	int jugada = validarJugada();
-	posiocupada[1] = jugada;
+
 	turno = 2;
 	ponerDadojugador(jugada);
 	return turno;
