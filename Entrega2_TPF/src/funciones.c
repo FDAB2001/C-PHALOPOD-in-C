@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 extern int lamatriz[26][7][2];
 void limpiarBuffer(){
 	int x=0;
