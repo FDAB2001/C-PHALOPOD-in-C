@@ -10,4 +10,5 @@
 
 int computadora(int);
 void ponerDado(int);
+//fede al final me olvide de poner la funcion aca de dadocompu pero igual funciona no se porque
 #endif /* COMPUTADORA_H_ */
