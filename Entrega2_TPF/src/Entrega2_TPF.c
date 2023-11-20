@@ -242,6 +242,7 @@ void EXPOSICION_NOMBRE(GtkWidget *widget, gpointer data) {
     if (modo == 1 && nombre_jugador2 != NULL) {
         // Establece el texto en el widget de visualización de nombre2
         gtk_label_set_text(GTK_LABEL(tablero_nombre_display2), nombre_jugador2);
+	gtk_label_set_text(GTK_LABEL(tablero_nombre_display), nombre_jugador);
     } else if (nombre_jugador != NULL) {
         // Establece el texto en el widget de visualización de nombre
         gtk_label_set_text(GTK_LABEL(tablero_nombre_display), nombre_jugador);
