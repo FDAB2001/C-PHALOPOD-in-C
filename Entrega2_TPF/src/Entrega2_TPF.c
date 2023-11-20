@@ -667,7 +667,6 @@ int main(int argc, char *argv[])
 	//En el menu creditos, el cerrar
 
 	g_signal_connect(creadores_salir, "clicked", G_CALLBACK(OCULTAR_CREDITOS),NULL);
-	g_signal_connect(tablero_reiniciar, "clicked", G_CALLBACK(PRESIONADO_1), NULL);
 	//Los siguientes son los botones presionados
 	g_signal_connect(BOTON1, "clicked", G_CALLBACK(PRESIONADO_1), NULL);
 	g_signal_connect(BOTON2, "clicked", G_CALLBACK(PRESIONADO_2), NULL);
