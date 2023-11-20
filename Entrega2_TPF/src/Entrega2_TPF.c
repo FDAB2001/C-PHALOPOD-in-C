@@ -38,6 +38,7 @@ GtkWidget *menu_tablero, *tablero_reiniciar, *tablero_opciones,
 //Botones
 GtkWidget *BOTON1,*BOTON2,*BOTON3,*BOTON4,*BOTON5,*BOTON6,*BOTON7,*BOTON8,*BOTON9,*BOTON10,*BOTON11,*BOTON12,*BOTON13,*BOTON14,*BOTON15,*BOTON16,*BOTON17,*BOTON18,*BOTON19,*BOTON20,*BOTON21,*BOTON22,*BOTON23,*BOTON24,*BOTON25;
 
+GtkWidget *vector[26];
 void declarar_widgets() {
 	//Declaraciones de la ventana opciones
 	menu_opciones = GET_WIDGET(constructor, "menu_opciones");
@@ -94,6 +95,32 @@ void declarar_widgets() {
 	BOTON23 = GET_WIDGET(constructor, "menu_tablero_boton_23");
 	BOTON24 = GET_WIDGET(constructor, "menu_tablero_boton_24");
 	BOTON25 = GET_WIDGET(constructor, "menu_tablero_boton_25");
+	vector[1]=BOTON1;
+	vector[2]=BOTON1;
+	vector[3]=BOTON1;
+	vector[4]=BOTON1;
+	vector[5]=BOTON1;
+	vector[6]=BOTON1;
+	vector[7]=BOTON1;
+	vector[8]=BOTON1;
+	vector[9]=BOTON1;
+	vector[10]=BOTON1;
+	vector[11]=BOTON1;
+	vector[12]=BOTON1;
+	vector[13]=BOTON1;
+	vector[14]=BOTON1;
+	vector[15]=BOTON1;
+	vector[16]=BOTON1;
+	vector[17]=BOTON1;
+	vector[18]=BOTON1;
+	vector[19]=BOTON1;
+	vector[20]=BOTON1;
+	vector[21]=BOTON1;
+	vector[22]=BOTON1;
+	vector[23]=BOTON1;
+	vector[24]=BOTON1;
+	vector[25]=BOTON1;
+
 }
 
 //1 jcj 2 jcia 3 iacia
@@ -455,182 +482,17 @@ void actualizar_GTK() {
 		}
 	}
 }
-void PRESIONADO_1(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 1;
+
+void PRESIONADO(GtkWidget *widget, gpointer data) {
+
+	jugadaGTK = GPOINTER_TO_INT(data);
 	verificarjugada(jugadaGTK);
 	//computadora(1);//ojo con el 1, solo por esta entrega ponemos eso ahi
 	g_print("\n");
 	imprimir_matriz();
 	actualizar_GTK();
 }
-void PRESIONADO_2(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 2;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_3(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 3;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_4(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 4;
-	verificarjugada(jugadaGTK);
-	actualizar_GTK();
-	g_print("\n");
-		imprimir_matriz();
-}
-void PRESIONADO_5(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 5;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_6(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 6;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_7(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 7;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_8(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 8;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_9(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 9;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_10(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 10;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_11(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 11;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_12(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 12;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_13(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 13;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_14(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 14;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_15(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 15;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_16(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 16;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_17(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 17;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_18(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 18;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_19(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 19;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_20(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 20;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_21(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 21;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_22(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 22;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_23(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 23;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_24(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 24;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
-void PRESIONADO_25(GtkWidget *widget, gpointer data) {
-	jugadaGTK = 25;
-	verificarjugada(jugadaGTK);
-	g_print("\n");
-		imprimir_matriz();
-		actualizar_GTK();
-}
+
 void REINICIAR(GtkWidget *widget, gpointer data) {
     // Limpia la matriz
 	vaciar_matriz();
@@ -668,31 +530,31 @@ int main(int argc, char *argv[])
 
 	g_signal_connect(creadores_salir, "clicked", G_CALLBACK(OCULTAR_CREDITOS),NULL);
 	//Los siguientes son los botones presionados
-	g_signal_connect(BOTON1, "clicked", G_CALLBACK(PRESIONADO_1), NULL);
-	g_signal_connect(BOTON2, "clicked", G_CALLBACK(PRESIONADO_2), NULL);
-	g_signal_connect(BOTON3, "clicked", G_CALLBACK(PRESIONADO_3), NULL);
-	g_signal_connect(BOTON4, "clicked", G_CALLBACK(PRESIONADO_4), NULL);
-	g_signal_connect(BOTON5, "clicked", G_CALLBACK(PRESIONADO_5), NULL);
-	g_signal_connect(BOTON6, "clicked", G_CALLBACK(PRESIONADO_6), NULL);
-	g_signal_connect(BOTON7, "clicked", G_CALLBACK(PRESIONADO_7), NULL);
-	g_signal_connect(BOTON8, "clicked", G_CALLBACK(PRESIONADO_8), NULL);
-	g_signal_connect(BOTON9, "clicked", G_CALLBACK(PRESIONADO_9), NULL);
-	g_signal_connect(BOTON10, "clicked", G_CALLBACK(PRESIONADO_10), NULL);
-	g_signal_connect(BOTON11, "clicked", G_CALLBACK(PRESIONADO_11), NULL);
-	g_signal_connect(BOTON12, "clicked", G_CALLBACK(PRESIONADO_12), NULL);
-	g_signal_connect(BOTON13, "clicked", G_CALLBACK(PRESIONADO_13), NULL);
-	g_signal_connect(BOTON14, "clicked", G_CALLBACK(PRESIONADO_14), NULL);
-	g_signal_connect(BOTON15, "clicked", G_CALLBACK(PRESIONADO_15), NULL);
-	g_signal_connect(BOTON16, "clicked", G_CALLBACK(PRESIONADO_16), NULL);
-	g_signal_connect(BOTON17, "clicked", G_CALLBACK(PRESIONADO_17), NULL);
-	g_signal_connect(BOTON18, "clicked", G_CALLBACK(PRESIONADO_18), NULL);
-	g_signal_connect(BOTON19, "clicked", G_CALLBACK(PRESIONADO_19), NULL);
-	g_signal_connect(BOTON20, "clicked", G_CALLBACK(PRESIONADO_20), NULL);
-	g_signal_connect(BOTON21, "clicked", G_CALLBACK(PRESIONADO_21), NULL);
-	g_signal_connect(BOTON22, "clicked", G_CALLBACK(PRESIONADO_22), NULL);
-	g_signal_connect(BOTON23, "clicked", G_CALLBACK(PRESIONADO_23), NULL);
-	g_signal_connect(BOTON24, "clicked", G_CALLBACK(PRESIONADO_24), NULL);
-	g_signal_connect(BOTON25, "clicked", G_CALLBACK(PRESIONADO_25), NULL);
+	g_signal_connect(BOTON1, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(1));
+	g_signal_connect(BOTON2, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(2));
+	g_signal_connect(BOTON3, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(3));
+	g_signal_connect(BOTON4, "clicked", G_CALLBACK(PRESIONADO),GINT_TO_POINTER(4));
+	g_signal_connect(BOTON5, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(5));
+	g_signal_connect(BOTON6, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(6));
+	g_signal_connect(BOTON7, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(7));
+	g_signal_connect(BOTON8, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(8));
+	g_signal_connect(BOTON9, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(9));
+	g_signal_connect(BOTON10, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(10));
+	g_signal_connect(BOTON11, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(11));
+	g_signal_connect(BOTON12, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(12));
+	g_signal_connect(BOTON13, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(13));
+	g_signal_connect(BOTON14, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(14));
+	g_signal_connect(BOTON15, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(15));
+	g_signal_connect(BOTON16, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(16));
+	g_signal_connect(BOTON17, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(17));
+	g_signal_connect(BOTON18, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(18));
+	g_signal_connect(BOTON19, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(19));
+	g_signal_connect(BOTON20, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(20));
+	g_signal_connect(BOTON21, "clicked", G_CALLBACK(PRESIONADO),GINT_TO_POINTER(21));
+	g_signal_connect(BOTON22, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(22));
+	g_signal_connect(BOTON23, "clicked", G_CALLBACK(PRESIONADO),GINT_TO_POINTER(23));
+	g_signal_connect(BOTON24, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(24));
+	g_signal_connect(BOTON25, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(25));
 
 	gtk_widget_show(menu_opciones);
 	g_signal_connect(menu_opciones, "destroy", G_CALLBACK(gtk_main_quit), NULL);
