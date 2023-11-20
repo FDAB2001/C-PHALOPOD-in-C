@@ -166,7 +166,7 @@ void ABRIR_TABLERO(GtkWidget *widget, gpointer data) {
 	if (decisiontomada!=0 && modo!=0) {
 		if(decisiontomada==2){
 		computadora(1);
-		void actualizar_GTK();
+		actualizar_GTK();
 		}
 		jugar_pressed = 0; // Así el loop termina cuando se presiona salir
 
