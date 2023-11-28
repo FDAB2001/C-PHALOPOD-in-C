@@ -871,5 +871,6 @@ if(modo==2){
 	return (turno);
 }
 
+	return (turno);
 }
 
