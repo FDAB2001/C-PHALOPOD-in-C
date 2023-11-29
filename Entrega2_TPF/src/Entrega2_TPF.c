@@ -7,7 +7,7 @@
 #include <stdint.h>
 #define GET_WIDGET(builder, name) GTK_WIDGET(gtk_builder_get_object(builder, name))
 //el filepath del glade para rapido acceso y uso
-#define GLADE_FILE_PATH "/home/lp1-2023/eclipse-workspace/Entrega2_TPF/src/Tpfinal2.glade"
+#define GLADE_FILE_PATH "Tpfinal2.glade"
 //macro para los 25 botones, asi es mas facil escribir codigo
 #define conectar(i, func) g_signal_connect(tablero[i], "clicked", G_CALLBACK(func), tablero[i])
 extern int jugadaGTK;
@@ -21,7 +21,12 @@ const gchar *nombre_jugador = NULL;
 const gchar *nombre_jugador2 = NULL;
 extern int jugar_pressed;
 extern int modo;
-
+extern int suma;
+extern int vector[5];
+int temp1;
+int temp2;
+int temp3;
+int temp4;
 GtkBuilder *constructor;
 //Ventana opciones
 GtkWidget *menu_opciones, *opciones_jcj, *opciones_JCIA,
@@ -37,8 +42,8 @@ GtkWidget *menu_tablero, *tablero_reiniciar, *tablero_opciones,
 		*tablero_como_jugar, *tablero_creditos,*tablero_nombre_display,*tablero_nombre_display2;
 //Botones
 GtkWidget *BOTON1,*BOTON2,*BOTON3,*BOTON4,*BOTON5,*BOTON6,*BOTON7,*BOTON8,*BOTON9,*BOTON10,*BOTON11,*BOTON12,*BOTON13,*BOTON14,*BOTON15,*BOTON16,*BOTON17,*BOTON18,*BOTON19,*BOTON20,*BOTON21,*BOTON22,*BOTON23,*BOTON24,*BOTON25;
-
-GtkWidget *vector[26];
+//Ventana seleccionar
+GtkWidget *menu_seleccionar,*seleccionar_confirmar,*izquierdaGTK,*derechaGTK,*arribaGTK,*abajoGTK,*suma_display,*explicar_display;
 void declarar_widgets() {
 	//Declaraciones de la ventana opciones
 	menu_opciones = GET_WIDGET(constructor, "menu_opciones");
@@ -69,6 +74,17 @@ void declarar_widgets() {
 	tablero_opciones = GET_WIDGET(constructor, "menu_tablero_opciones");
 	tablero_como_jugar = GET_WIDGET(constructor, "menu_tablero_como_jugar");
 	tablero_creditos = GET_WIDGET(constructor, "menu_tablero_creditos");
+	//Declaraciones menu seleccionar
+	menu_seleccionar= GET_WIDGET(constructor, "menu_seleccionar");
+	seleccionar_confirmar=GET_WIDGET(constructor, "menu_seleccionar_confirmar");
+	suma_display=GET_WIDGET(constructor,"menu_seleccionar_sumadisplay");
+	explicar_display=GET_WIDGET(constructor,"menu_seleccionar_explicar");
+	izquierdaGTK=GET_WIDGET(constructor,"menu_seleccionar_izquierda");
+	derechaGTK=GET_WIDGET(constructor,"menu_seleccionar_derecha");
+	arribaGTK=GET_WIDGET(constructor,"menu_seleccionar_arriba");
+	abajoGTK=GET_WIDGET(constructor,"menu_seleccionar_abajo");
+
+
 	//Declaraciones botones
 	BOTON1 = GET_WIDGET(constructor, "menu_tablero_boton_1");
 	BOTON2 = GET_WIDGET(constructor, "menu_tablero_boton_2");
@@ -473,6 +489,85 @@ void REINICIAR(GtkWidget *widget, gpointer data) {
     // Actualiza la interfaz gráfica
     actualizar_GTK();
 }
+void OCULTAR_SELECCIONAR(GtkWidget *widget, gpointer data) {
+	if (suma < 7 && suma > 2) {
+		sumarDado(suma, jugadaGTK);
+		actualizar_GTK();
+		gtk_widget_show(menu_tablero);
+		gtk_widget_hide(menu_seleccionar);
+		temp1=0;
+		temp2=0;
+		temp3=0;
+		temp4=0;
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(izquierdaGTK),FALSE);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(derechaGTK),FALSE);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(arribaGTK),FALSE);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(abajoGTK),FALSE);
+
+	} else {
+		gtk_label_set_text(GTK_LABEL(suma_display), "suma invalida");
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(izquierdaGTK),FALSE);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(derechaGTK),FALSE);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(arribaGTK),FALSE);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(abajoGTK),FALSE);
+		temp1=0;
+		temp2=0;
+		temp3=0;
+		temp4=0;
+	}
+}
+/*Funcion de los botones que se toglean para la seleccion de que dados comer,
+ * establece variables estaticas temporales de izquierda derecha arriba y abajo en ese orden
+ * que van cambiando de acuerdo a la ubicacion de la jugada y de los botones, ademas de
+ * ir cambiando visiblemente la suma actual, la suma es una variable global
+*/
+void BOTONES_TOGGLE(GtkToggleButton *toggle_button, gpointer data) {
+	char buffer[20];
+	int num = GPOINTER_TO_INT(data);
+	if (gtk_toggle_button_get_active(toggle_button)) {
+		switch (num) {
+		case 0:
+			temp1 = lamatriz[jugadaGTK - 1][0][0];
+			lamatriz[jugadaGTK - 1][0][0] = '\0';
+			break;
+		case 1:
+			temp2 = lamatriz[jugadaGTK + 1][0][0];
+			lamatriz[jugadaGTK + 1][0][0] = '\0';
+			break;
+		case 2:
+			temp3 = lamatriz[jugadaGTK - 5][0][0];
+			lamatriz[jugadaGTK - 5][0][0] = '\0';
+			break;
+		case 3:
+			temp4 = lamatriz[jugadaGTK + 5][0][0];
+			lamatriz[jugadaGTK + 5][0][0] = '\0';
+			break;
+
+		}
+		suma = suma + vector[num];
+		snprintf(buffer, sizeof(buffer), "%d", suma);
+		gtk_label_set_text(GTK_LABEL(suma_display), buffer);
+	} else {
+		switch (num) {
+		case 0:
+			lamatriz[jugadaGTK - 1][0][0] = temp1;
+			break;
+		case 1:
+			lamatriz[jugadaGTK + 1][0][0] = temp2;
+			break;
+		case 2:
+			lamatriz[jugadaGTK - 5][0][0] = temp3;
+			break;
+		case 3:
+			lamatriz[jugadaGTK + 5][0][0] = temp4;
+			break;
+
+		}
+		suma = suma - vector[num];
+		snprintf(buffer, sizeof(buffer), "%d", suma);
+		gtk_label_set_text(GTK_LABEL(suma_display), buffer);
+	}
+}
 
 int main(int argc, char *argv[])
 
@@ -501,8 +596,13 @@ int main(int argc, char *argv[])
 	//En el menu como jugar, el cerrar
 	g_signal_connect(como_jugar_cerrar, "clicked",G_CALLBACK(OCULTAR_INSTRUCCIONES), NULL);
 	//En el menu creditos, el cerrar
-
 	g_signal_connect(creadores_salir, "clicked", G_CALLBACK(OCULTAR_CREDITOS),NULL);
+	//El menu de seleccionar para hacer captura multiple
+	g_signal_connect(seleccionar_confirmar, "clicked", G_CALLBACK(OCULTAR_SELECCIONAR),NULL);
+	g_signal_connect(izquierdaGTK, "clicked", G_CALLBACK(BOTONES_TOGGLE), GINT_TO_POINTER(0));
+	g_signal_connect(derechaGTK, "clicked", G_CALLBACK(BOTONES_TOGGLE), GINT_TO_POINTER(1));
+	g_signal_connect(arribaGTK, "clicked", G_CALLBACK(BOTONES_TOGGLE), GINT_TO_POINTER(2));
+	g_signal_connect(abajoGTK, "clicked", G_CALLBACK(BOTONES_TOGGLE), GINT_TO_POINTER(3));
 	//Los siguientes son los botones presionados
 	g_signal_connect(BOTON1, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(1));
 	g_signal_connect(BOTON2, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(2));
@@ -529,6 +629,7 @@ int main(int argc, char *argv[])
 	g_signal_connect(BOTON23, "clicked", G_CALLBACK(PRESIONADO),GINT_TO_POINTER(23));
 	g_signal_connect(BOTON24, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(24));
 	g_signal_connect(BOTON25, "clicked", G_CALLBACK(PRESIONADO), GINT_TO_POINTER(25));
+
 
 	gtk_widget_show(menu_opciones);
 	g_signal_connect(menu_opciones, "destroy", G_CALLBACK(gtk_main_quit), NULL);
