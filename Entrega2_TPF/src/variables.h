@@ -15,4 +15,6 @@ int jugar_pressed;
 int turnoinicial;
 int jugadaGTK;
 int modo=0;
+int suma=0;
+int vector[] = { 0, 0, 0, 0, '\0' };
 #endif //VARIABLES_H_
