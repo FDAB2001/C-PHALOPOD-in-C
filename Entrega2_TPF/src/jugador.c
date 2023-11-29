@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <gtk/gtk.h>
+extern GtkWidget *menu_seleccionar,*izquierdaGTK,*derechaGTK,*arribaGTK,*abajoGTK,*menu_tablero,*explicar_display;
 extern int lamatriz[26][7][2];
+extern int suma;
 extern int decisiontomada;
+extern int vector[5];
 void enter();
 void limpiarBuffer();
 void dadojugador(int pos, int sumas) { //funcion que sirve para poder identificar a los dados de la compu
@@ -29,12 +32,13 @@ void dadoMas(int invalido,int jugada,int dif){
 	int abajo = lamatriz[jugada + 5][0][0];
 	int izquierda = lamatriz[jugada - 1][0][0];
 	int arriba = lamatriz[jugada - 5][0][0];
-	int vector[] = { izquierda, derecha, arriba, abajo, '\0' };
-	int suma = 0;
-	int resp = 0;
-	int comercantidad = 0;
-	int terminar = 0;
-	int ref[] = { -1, +1, -5, +5, '\0' };
+	suma=0;
+	vector[0]=izquierda;
+	vector[1]=derecha;
+	vector[2]=arriba;
+	vector[3]=abajo;
+	suma = 0;
+	char bufferIZQ[20],bufferDER[20],bufferARR[20],bufferABA[20];
 	if (!invalido) {
 		for(int i=0;i<4;i++){
 			if(vector[i]==invalido-1){
@@ -42,70 +46,24 @@ void dadoMas(int invalido,int jugada,int dif){
 			}
 		}
 	}
+
 	printf(
 			"Existen mas de 2 dados adyacentes, puede elegir cuantos y cuales eliminar siempre y cuando su suma sea menor a 6\n");
 	enter();
-	suma = 0;
-	while (terminar == 0) {
-		while (!resp || resp > dif || resp == 1){
-			printf("Seleccione cuantos comer ");
-			scanf("%d", &resp);
-		}
-		limpiarBuffer();
-		comercantidad = resp;
-		resp = 0;
-		enter();
-		for (int i = 0; i < comercantidad;) {
-			printf(
-					"Seleccione (1) izquierda (2) derecha (3) arriba (4) abajo: ");
-			while (!resp) {
-				scanf("%d", &resp);
-				limpiarBuffer();
-				for (int j = 0; j < 4 && resp != 0; j++) {
-					if (vector[resp - 1] == 0) {
-						printf("La posicion seleccionada no tiene un dado \n");
-						resp = 0;
-					} else if (vector[resp - 1] == 6) {
-						printf(
-								"La posicion seleccionada tiene un dado de valor 6, semejante acto es invalido \n");
-						resp = 0;
-					}
-				}
-			}
-			printf("Posicion seleccionada %d \n", resp);
-			printf("Suma actual=%d, lo cual sera %d si decides sumar\n", suma,suma+vector[resp-1]);
-			printf("¿Aceptas la suma? (1) si (2) no :");
-			int temp = 0;
-			while (temp > 2 || temp < 1)
-				scanf("%d", &temp);
-			limpiarBuffer();
-			enter();
-			if (suma < 7) {
-				if (temp == 1) {
-					if (suma + vector[resp - 1] < 7) {
-						suma += vector[resp - 1];
+	//Uno a uno se cambia el valor del label de los botones toggle para representar los numeros adyacentes
+	snprintf(bufferIZQ, sizeof(bufferIZQ), "Izquierda %d", vector[0]);
+	snprintf(bufferDER, sizeof(bufferDER), "Derecha %d", vector[1]);
+	snprintf(bufferARR, sizeof(bufferARR), "Arriba %d", vector[2]);
+	snprintf(bufferABA, sizeof(bufferABA), "Abajo %d", vector[3]);
+	//Los label se ponen en formato para mostrar
+	gtk_button_set_label(GTK_BUTTON(izquierdaGTK),(const gchar*) bufferIZQ);
+	gtk_button_set_label(GTK_BUTTON(derechaGTK),(const gchar*) bufferDER);
+	gtk_button_set_label(GTK_BUTTON(arribaGTK),(const gchar*) bufferARR);
+	gtk_button_set_label(GTK_BUTTON(abajoGTK),(const gchar*) bufferABA);
+	gtk_label_set_text(GTK_LABEL(explicar_display), "Seleccionar hasta 4\n numeros cuya suma \n sea menor a 6 y mayor a 2");
+	gtk_widget_show(menu_seleccionar);
+	gtk_widget_hide(menu_tablero);
 
-						lamatriz[jugada + ref[resp - 1]][0][0] = '\0';
-
-						i++;
-					} else {
-						printf(
-								"La posicion seleccionada otorga una suma invalida, secuencia reiniciada");
-						resp = 0;
-					}
-				} else {
-					printf("Secuencia reiniciada por negacion a la suma\n");
-					resp = 0;
-				}
-			} else {
-				printf("La suma actual es 6, cerrando secuencia");
-				comercantidad--;
-			}
-			resp = 0;
-		}
-		terminar++;
-	}
-	sumarDado(suma, jugada);
 }
 void ponerDadojugador(int jugada) {
 	int derecha = lamatriz[jugada + 1][0][0];
@@ -113,7 +71,7 @@ void ponerDadojugador(int jugada) {
 	int izquierda = lamatriz[jugada - 1][0][0];
 	int arriba = lamatriz[jugada - 5][0][0];
 	int vector[] = { izquierda, derecha, arriba, abajo, '\0' };
-	int suma = 0;
+	suma = 0;
 	int ref[] = { -1, +1, -5, +5, '\0' };
 	int dif = 0;
 	int ubi[4];
