@@ -20,13 +20,7 @@ void enter(){
 void vaciar_matriz(){
 	for(int i=0;i<=26;i++){
 		lamatriz[i][0][0]='\0';
-		for (int j=0;j<=7;j++){
-			lamatriz[i][j][0]='\0';
-			for(int k=0;k<=2;k++){
-				lamatriz[i][j][k]='\0';
-			}
-		}
-	}
+}
 }
 //lamatriz[i][1-6][0]= 1-2 aca
 void imprimir_matriz()
