@@ -503,8 +503,9 @@ void REINICIAR(GtkWidget *widget, gpointer data) {
     // Actualiza la interfaz gráfica
     actualizar_GTK();
 }
+int botonestogleadoscapturamultiple;
 void OCULTAR_SELECCIONAR(GtkWidget *widget, gpointer data) {
-	if (suma < 7  && suma > 1) {
+	if (suma < 7  && suma > 1&&botonestogleadoscapturamultiple>1) {
 		sumarDado(suma, jugadaGTK);
 		actualizar_GTK();
 		gtk_widget_show(menu_tablero);
@@ -539,6 +540,7 @@ void BOTONES_TOGGLE(GtkToggleButton *toggle_button, gpointer data) {
 	char buffer[20];
 	int num = GPOINTER_TO_INT(data);
 	if (gtk_toggle_button_get_active(toggle_button)) {
+		botonestogleadoscapturamultiple++;
 		switch (num) {
 		case 0:
 			temp1 = lamatriz[jugadaGTK - 1][0][0];
@@ -562,6 +564,7 @@ void BOTONES_TOGGLE(GtkToggleButton *toggle_button, gpointer data) {
 		snprintf(buffer, sizeof(buffer), "%d", suma);
 		gtk_label_set_text(GTK_LABEL(suma_display), buffer);
 	} else {
+		botonestogleadoscapturamultiple--;
 		switch (num) {
 		case 0:
 			lamatriz[jugadaGTK - 1][0][0] = temp1;
