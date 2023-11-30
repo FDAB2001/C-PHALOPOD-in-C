@@ -385,11 +385,12 @@ void TOGLEADO_ALE(GtkToggleButton *toggle_button, gpointer data) {
 }
 
 //Funcion del tablero
+
 void ABRIR_TABLERO(GtkWidget *widget, gpointer data) {
-	if (decisiontomada!=0 && modo!=0) {
-		if(decisiontomada==2){
-		computadora(1);
-		actualizar_GTK();
+	if (decisiontomada != 0 && modo != 0) {
+		if (decisiontomada == 2) {
+			computadora(1);
+			actualizar_GTK();
 		}
 		jugar_pressed = 0; // Así el loop termina cuando se presiona salir
 
@@ -399,31 +400,35 @@ void ABRIR_TABLERO(GtkWidget *widget, gpointer data) {
 		const gchar *nombre2 = gtk_entry_get_text(GTK_ENTRY(opciones_nombre2));
 
 		if (modo == 1) {
-		    if (nombre2 != NULL && g_strcmp0(nombre2, "") != 0) {
-		        const gsize max_length2 = 50;
-		        gchar nombre_limitado2[max_length2 + 1];
-		        g_strlcpy(nombre_limitado2, nombre2, sizeof(nombre_limitado2));
-		        strcpy(nombrejugador2Global, nombre_limitado2);
-		        nombre_jugador2 = nombre_limitado2;
-		    } else {
-		        // Asignar un valor predeterminado si es necesario
-		        strcpy(nombrejugador2Global, "La Computadora");
-		        nombre_jugador2 = nombrejugador2Global;
-		    }
-		}
-
+			// Verifica que el nombre no esté vacío antes de asignarlo
+			if (nombre2 != NULL && g_strcmp0(nombre2, "") != 0) {
+				// Limita la longitud del nombre para evitar desbordamientos
+				const gsize max_length2 = 50;  // Establece la longitud
+				gchar nombre_limitado2[max_length2 + 1]; // +1 para el carácter nulo
+				g_strlcpy(nombre_limitado2, nombre2, max_length2 + 1);
+				nombre_jugador2 = g_strdup(nombre_limitado2); // Copia el nombre limitado
+				strncpy(nombrejugador2Global,nombre2,sizeof(nombrejugador2Global));
+				printf("%s",nombrejugador2Global);
+			} else {
+				// Proporciona un valor predeterminado
+				nombre_jugador2 = "Jugador Anonimo 2";
+			}
+		}else if(modo ==2){nombre_jugador2 = "La Computadora";
+		strncpy(nombrejugador2Global,nombre_jugador2,sizeof(nombrejugador2Global));}
 
 		// Verifica que el nombre no esté vacío antes de asignarlo
 		if (nombre != NULL && g_strcmp0(nombre, "") != 0) {
-		    const gsize max_length = 50;
-		    gchar nombre_limitado[max_length + 1];
-		    g_strlcpy(nombre_limitado, nombre, sizeof(nombre_limitado));
-		    strcpy(nombrejugador1Global, nombre_limitado);
-		    nombre_jugador = nombre_limitado;
+			// Limita la longitud del nombre para evitar desbordamientos
+			const gsize max_length = 50;  // Establece la longitud
+			gchar nombre_limitado[max_length + 1];  // +1 para el carácter nulo
+			g_strlcpy(nombre_limitado, nombre, max_length + 1);
+			nombre_jugador = g_strdup(nombre_limitado); // Copia el nombre limitado
+			strncpy(nombrejugador1Global,nombre,sizeof(nombrejugador1Global));//Copia el nombre a la variable global
+			printf("%s",nombrejugador1Global);//Copia el nombre a la variable global
 		} else {
-		    // Asignar un valor predeterminado si es necesario
-		    strcpy(nombrejugador1Global, "Jugador Anónimo");
-		    nombre_jugador = nombrejugador1Global;
+			// Proporciona un valor predeterminado
+			nombre_jugador = "Jugador Anónimo";
+			strncpy(nombrejugador1Global,nombre_jugador,sizeof(nombrejugador1Global));
 		}
 
 		// Muestra la ventana del tablero
