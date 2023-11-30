@@ -471,7 +471,21 @@ void OCULTAR_CREDITOS(GtkWidget *widget, gpointer data) {
 void verificarjugada(int jugada) {
 
 	if (lamatriz[jugada][0][0] == '\0' && turno != 0) {
+		if(modo==1&&decisiontomada==1){
+			turno = jugador(turno, jugada);
+			decisiontomada=2;
+			printf("entra primero");
+			enter();
+		}
+		else if(modo==1&&decisiontomada==2){
+			turno=jugador(turno,jugada);
+			decisiontomada=1;
+			printf("entra segundo");
+			enter();
+		}
+		if(modo==2)
 		turno = jugador(turno, jugada);
+
 		int posicvacia=0;
 		for (int i = 1; i < 26; i++) {
 			//antes del turno de la computadora se verifica que existen lugares disponibles por si acaso
