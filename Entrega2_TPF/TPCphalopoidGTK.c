@@ -504,7 +504,7 @@ void REINICIAR(GtkWidget *widget, gpointer data) {
     actualizar_GTK();
 }
 void OCULTAR_SELECCIONAR(GtkWidget *widget, gpointer data) {
-	if (suma < 7  && suma > 2) {
+	if (suma < 7  && suma > 1) {
 		sumarDado(suma, jugadaGTK);
 		actualizar_GTK();
 		gtk_widget_show(menu_tablero);
