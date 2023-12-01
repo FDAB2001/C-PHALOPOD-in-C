@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
+#include "funciones.h"
 extern int lamatriz[26][7][2];
 extern int posiocupada[1]; //aca se guarda la posicion que eligio el usuario
 //extern int turnoinicial; //"Traigo" el valor del turnoinicial para saber quien comienza
@@ -665,7 +666,11 @@ void decirposi(int posi){
 	printf("La compu eligio la posicion %d",posi);
 }
 
-int computadora( turno) {
+int computadora(int turno) {
+
+int dispo=diceposisdispo();
+
+if(dispo!=0){
 
 turno = 1;
 if(modo==2){
@@ -675,12 +680,12 @@ if(modo==2){
 		lamatriz[numerorandom][0][0] = 1;
 		ponerDado(numerorandom);
 		contadorturnoinicial++;
-		printf("HOLA");
+
 
 
 		return (turno); //en el caso de que el usuario quiera que la compu comience, tira uno random
 	} else {
-		printf("HOLA");
+
 		//yo no sabia que podia ser simplemente random la posicion que elegia la compu, entonces su funcionamiento, que es de lo mas
 		//basico, seria el siguiente:agarra la posicion que eligio el usuario y la compu ve si puede colocar su dado arriba, abajo,
 		//a la izquierda o a la derecha, y si no puede, tira uno random, y se dividen como en la fucncion de arriba (computadora):
@@ -852,17 +857,11 @@ if(modo==2){
 		//ya si ningun if se cumple, se crea un numero aleatorio que debe cumplir que no sea cero y que la posicion de este numero
 		//random debe estar vacio
 
-		srand(time(NULL));
-		int numerorandom = rand() % 25 + 1;
 
-		while (lamatriz[numerorandom][0][0] != '\0' || numerorandom == 0) {
-			srand(time(NULL));
-			numerorandom = rand() % 25 + 1;
+		int posicionlibre=lugareslibres();
+		lamatriz[posicionlibre][0][0] = 1;
+		ponerDado(posicionlibre);
 
-		}
-		lamatriz[numerorandom][0][0] = 1;
-
-		ponerDado(numerorandom);
 
 		return (turno);
 
@@ -870,7 +869,8 @@ if(modo==2){
 
 	return (turno);
 }
-
-	return (turno);
 }
+return (turno);
+}
+
 
