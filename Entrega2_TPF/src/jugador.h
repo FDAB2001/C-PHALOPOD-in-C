@@ -7,9 +7,8 @@ void dadoUno(int);
 void dadoMas(int,int,int);
 void sumarDado(int,int);
 int validarJugada(void);
-int jugador(int);
+int jugador(int,int);
 void ponerDadojugador(int);
 
 
 #endif
-
