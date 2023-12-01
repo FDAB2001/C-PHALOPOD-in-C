@@ -6,8 +6,7 @@ extern int lamatriz[26][7][2];
 extern int suma;
 extern int decisiontomada;
 extern int vector[5];
-void enter();
-void limpiarBuffer();
+//void enter();
 void dadojugador(int pos, int sumas) { //funcion que sirve para poder identificar a los dados de la compu
 	if (decisiontomada == 1) {
 		lamatriz[pos][sumas][0] = 1; //la compu se identificara por corchete
@@ -32,37 +31,63 @@ void dadoMas(int invalido,int jugada,int dif){
 	int abajo = lamatriz[jugada + 5][0][0];
 	int izquierda = lamatriz[jugada - 1][0][0];
 	int arriba = lamatriz[jugada - 5][0][0];
+	int comprobar=0;
 	suma=0;
 	vector[0]=izquierda;
 	vector[1]=derecha;
 	vector[2]=arriba;
 	vector[3]=abajo;
-	suma = 0;
+
 	char bufferIZQ[20],bufferDER[20],bufferARR[20],bufferABA[20];
-	if (!invalido) {
+	if (invalido) {
 		for(int i=0;i<4;i++){
-			if(vector[i]==invalido-1){
+			if(i==invalido-1){
 				vector[i]=0;
 			}
 		}
 	}
+	 //verifica si hay alguna suma posible
+		for(int i=0;i<4;i++){
+			for(int j=0;j<4;j++){
+				suma=0;
+				if((i!=invalido-1&&j!=invalido-1)&&i!=j){
+					suma=vector[i]+vector[j];
+					printf("Suma es: %d\n",suma);
+				}
+				if(suma<=6&&suma!=0){
+					printf("\n %d funciona",comprobar);
+					printf("%d izq",vector[0]);
+					printf("%d der",vector[1]);
+					printf("%d arr",vector[2]);
+					printf("%d aba",vector[3]);
+					comprobar++;
+				}
+			}
+		}
+	for(int i=0;i<4;i++){
+		if(vector[i]==6){
+			vector[i]=0;
+		}
+	}
 
-	printf(
-			"Existen mas de 2 dados adyacentes, puede elegir cuantos y cuales eliminar siempre y cuando su suma sea menor a 6\n");
-	enter();
-	//Uno a uno se cambia el valor del label de los botones toggle para representar los numeros adyacentes
-	snprintf(bufferIZQ, sizeof(bufferIZQ), "Izquierda %d", vector[0]);
-	snprintf(bufferDER, sizeof(bufferDER), "Derecha %d", vector[1]);
-	snprintf(bufferARR, sizeof(bufferARR), "Arriba %d", vector[2]);
-	snprintf(bufferABA, sizeof(bufferABA), "Abajo %d", vector[3]);
-	//Los label se ponen en formato para mostrar
-	gtk_button_set_label(GTK_BUTTON(izquierdaGTK),(const gchar*) bufferIZQ);
-	gtk_button_set_label(GTK_BUTTON(derechaGTK),(const gchar*) bufferDER);
-	gtk_button_set_label(GTK_BUTTON(arribaGTK),(const gchar*) bufferARR);
-	gtk_button_set_label(GTK_BUTTON(abajoGTK),(const gchar*) bufferABA);
-	gtk_label_set_text(GTK_LABEL(explicar_display), "Seleccionar hasta 4\n numeros cuya suma \n sea menor a 6 y mayor a 2");
-	gtk_widget_show(menu_seleccionar);
-	gtk_widget_hide(menu_tablero);
+
+	if (comprobar!=0) {
+		suma=0;
+		//Uno a uno se cambia el valor del label de los botones toggle para representar los numeros adyacentes
+		snprintf(bufferIZQ, sizeof(bufferIZQ), "Izquierda %d", vector[0]);
+		snprintf(bufferDER, sizeof(bufferDER), "Derecha %d", vector[1]);
+		snprintf(bufferARR, sizeof(bufferARR), "Arriba %d", vector[2]);
+		snprintf(bufferABA, sizeof(bufferABA), "Abajo %d", vector[3]);
+
+		//Los label se ponen en formato para mostrar
+		gtk_button_set_label(GTK_BUTTON(izquierdaGTK),(const gchar*) bufferIZQ);
+		gtk_button_set_label(GTK_BUTTON(derechaGTK),(const gchar*) bufferDER);
+		gtk_button_set_label(GTK_BUTTON(arribaGTK),(const gchar*) bufferARR);
+		gtk_button_set_label(GTK_BUTTON(abajoGTK),(const gchar*) bufferABA);
+		gtk_label_set_text(GTK_LABEL(explicar_display), "Seleccionar hasta 4\n numeros cuya suma \n sea menor a 6 y mayor a 2");
+		gtk_widget_show(menu_seleccionar);
+		gtk_widget_hide(menu_tablero);
+	}else{dadoUno(jugada);}
 
 }
 void ponerDadojugador(int jugada) {
@@ -103,7 +128,8 @@ void ponerDadojugador(int jugada) {
 		}
 	}
 	//ESQUINAS INICIO
-	if (jugada == 1) {
+	switch (jugada) {
+	case 1:
 		suma = derecha + abajo;
 		if (derecha != 0 && abajo != 0 && suma < 7) {
 			sumarDado(suma, jugada);
@@ -112,9 +138,9 @@ void ponerDadojugador(int jugada) {
 		} else {
 			dadoUno(jugada);
 		}
+		break;
 
-	}
-	if (jugada == 5) {
+	case 5:
 		suma = izquierda + abajo;
 		if (izquierda != 0 && abajo != 0 && suma < 7) {
 			sumarDado(suma, jugada);
@@ -123,8 +149,8 @@ void ponerDadojugador(int jugada) {
 		} else {
 			dadoUno(jugada);
 		}
-	}
-	if (jugada == 21) {
+		break;
+	case 21:
 		suma = derecha + arriba;
 		if (derecha != 0 && arriba != 0 && suma < 7) {
 			sumarDado(suma, jugada);
@@ -133,8 +159,8 @@ void ponerDadojugador(int jugada) {
 		} else {
 			dadoUno(jugada);
 		}
-	}
-	if (jugada == 25) {
+		break;
+	case 25:
 		suma = izquierda + arriba;
 		if (izquierda != 0 && arriba != 0 && suma < 7) {
 			sumarDado(suma, jugada);
@@ -144,6 +170,7 @@ void ponerDadojugador(int jugada) {
 		} else {
 			dadoUno(jugada);
 		}
+		break;
 	}
 	//ESQUINAS FIN
 
@@ -251,29 +278,9 @@ void ponerDadojugador(int jugada) {
 	}
 }
 
-int validarJugada() {
 
-	int posicion = 0;
-	while ((posicion < 1 || posicion > 25)) {
-		printf("Seleccione una posicion: ");
-		scanf("%d", &posicion);
-		limpiarBuffer();
-		enter();
-		if (lamatriz[posicion][0][0] != '\0'||lamatriz[posicion][0][0]!=0) {
-			printf("La posicion tiene un dado");
-			enter();
-			posicion = 0;
-		}
-	}
-	return posicion;
-}
+int jugador(int turno, int jugada) {
 
-int jugador(int turno) {
-
-
-	printf("Seleccione en que casilla del 1 al 25 para poner el dado\n");
-
-	int jugada = validarJugada();
 
 	turno = 2;
 	ponerDadojugador(jugada);
