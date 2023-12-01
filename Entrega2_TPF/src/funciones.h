@@ -4,13 +4,16 @@
 void limpiarBuffer();
 void vaciar_matriz();
 void enter();
-void imprimirMatriz();
+void imprimir_matriz();
 int verificarTurno(int);
 void tablaPosiciones();
 void imprimirDecision();
 void decirturnoini(int);
 void decirparente();
 int numeroAleatorio(int,int);
+int verificarGanador(int);
+void stats(char *, int);
+int diceposisdispo();
+int lugareslibres();
 
 #endif /* FUNCIONES_H_ */
-
