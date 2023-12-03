@@ -6,6 +6,9 @@
 #include "computadora.h"
 #include "funciones.h"
 #include <stdint.h>
+#include <unistd.h>
+
+
 #define GET_WIDGET(builder, name) GTK_WIDGET(gtk_builder_get_object(builder, name))
 //el filepath del glade para rapido acceso y uso
 #define GLADE_FILE_PATH "Tpfinal2.glade"
@@ -26,6 +29,7 @@ int temp1;
 int temp2;
 int temp3;
 int temp4;
+int botonestogleadoscapturamultiple;
 GtkBuilder *constructor;
 //Ventana opciones
 GtkWidget *menu_opciones, *opciones_jcj, *opciones_JCIA,
@@ -38,11 +42,13 @@ GtkWidget *menu_creadores, *creadores_salir;
 GtkWidget *menu_como_jugar, *como_jugar_cerrar;
 //Ventana tablero
 GtkWidget *menu_tablero, *tablero_reiniciar, *tablero_opciones,
-		*tablero_como_jugar, *tablero_creditos,*tablero_nombre_display,*tablero_nombre_display2;
+		*tablero_como_jugar, *tablero_creditos,*tablero_nombre_display,*tablero_nombre_display2, *menu_stats;
 //Botones
 GtkWidget *BOTON1,*BOTON2,*BOTON3,*BOTON4,*BOTON5,*BOTON6,*BOTON7,*BOTON8,*BOTON9,*BOTON10,*BOTON11,*BOTON12,*BOTON13,*BOTON14,*BOTON15,*BOTON16,*BOTON17,*BOTON18,*BOTON19,*BOTON20,*BOTON21,*BOTON22,*BOTON23,*BOTON24,*BOTON25;
 //Ventana seleccionar
 GtkWidget *menu_seleccionar,*seleccionar_confirmar,*izquierdaGTK,*derechaGTK,*arribaGTK,*abajoGTK,*suma_display,*explicar_display;
+
+GtkWidget *numdado1,*numdado2;
 void declarar_widgets() {
 	//Declaraciones de la ventana opciones
 	menu_opciones = GET_WIDGET(constructor, "menu_opciones");
@@ -65,14 +71,16 @@ void declarar_widgets() {
 	como_jugar_cerrar = GET_WIDGET(constructor, "menu_como_jugar_cerrar");
 	//Declaraciones tablero
 	menu_tablero = GET_WIDGET(constructor, "menu_tablero");
-	tablero_nombre_display = GET_WIDGET(constructor,
-			"menu_tablero_nombre_display");
+	menu_stats = GET_WIDGET(constructor, "menu_tablero_stats");
+	tablero_nombre_display = GET_WIDGET(constructor,"menu_tablero_nombre_display");
 	tablero_nombre_display2=GET_WIDGET(constructor,
 			"menu_tablero_nombre_display2");
 	tablero_reiniciar = GET_WIDGET(constructor, "menu_tablero_reiniciar");
 	tablero_opciones = GET_WIDGET(constructor, "menu_tablero_opciones");
 	tablero_como_jugar = GET_WIDGET(constructor, "menu_tablero_como_jugar");
 	tablero_creditos = GET_WIDGET(constructor, "menu_tablero_creditos");
+	numdado1=GET_WIDGET(constructor, "numdados1");
+	numdado2=GET_WIDGET(constructor, "numdados2");
 	//Declaraciones menu seleccionar
 	menu_seleccionar= GET_WIDGET(constructor, "menu_seleccionar");
 	seleccionar_confirmar=GET_WIDGET(constructor, "menu_seleccionar_confirmar");
@@ -118,9 +126,9 @@ void actualizar_GTK() { //como dice la funcion, el GTK "mira" la matriz y se act
 		char buffer[20];
 		if (valor != '\0' && lamatriz[i][0][0] != '\0') {
 			if (lamatriz[i][valor][0] == 2) {
-				snprintf(buffer, sizeof(buffer), "[%d]", valor);
+				snprintf(buffer, sizeof(buffer), "[%d]", valor); //rojo
 			} else {
-				snprintf(buffer, sizeof(buffer), "(%d)", valor);
+				snprintf(buffer, sizeof(buffer), "(%d)", valor); //verde
 			}
 			switch (i) {
 			case 1:
@@ -406,15 +414,38 @@ void ABRIR_TABLERO(GtkWidget *widget, gpointer data) {
 				const gsize max_length2 = 50;  // Establece la longitud
 				gchar nombre_limitado2[max_length2 + 1]; // +1 para el carácter nulo
 				g_strlcpy(nombre_limitado2, nombre2, max_length2 + 1);
-				nombre_jugador2 = g_strdup(nombre_limitado2); // Copia el nombre limitado
-				strncpy(nombrejugador2Global,nombre2,sizeof(nombrejugador2Global));
-				printf("%s",nombrejugador2Global);
+				char buffer[100];
+				if(decisiontomada==2){
+				snprintf(buffer, sizeof(buffer), "%s (verde)",g_strdup(nombre_limitado2));
+				//nombre_jugador2 = g_strdup(nombre_limitado2); // Copia el nombre limitado
+				nombre_jugador2=g_strdup(buffer);
+				strncpy(nombrejugador2Global, nombre2,sizeof(nombrejugador2Global));
+
+				}
+				else{
+					snprintf(buffer, sizeof(buffer), "%s [rojo]",g_strdup(nombre_limitado2));
+					//nombre_jugador2 = g_strdup(nombre_limitado2); // Copia el nombre limitado
+					nombre_jugador2 = g_strdup(buffer);
+					strncpy(nombrejugador2Global, nombre2,sizeof(nombrejugador2Global));
+
+				}
+				printf("%s", nombrejugador2Global);
 			} else {
 				// Proporciona un valor predeterminado
-				nombre_jugador2 = "Jugador Anonimo 2";
+				if(decisiontomada==2){
+				nombre_jugador2 = "Jugador_Anonimo_2 (verde)";
+				}else{
+					nombre_jugador2 = "Jugador_Anonimo_2 [rojo]";
+				}
 			}
-		}else if(modo ==2){nombre_jugador2 = "La Computadora";
-		strncpy(nombrejugador2Global,nombre_jugador2,sizeof(nombrejugador2Global));}
+		} else if (modo == 2) {
+			if (decisiontomada == 2) {
+				nombre_jugador2 = "La Computadora (verde)";
+			} else {
+				nombre_jugador2 = "La Computadora [rojo]";
+			}
+			strncpy(nombrejugador2Global, nombre_jugador2,sizeof(nombrejugador2Global));
+		}
 
 		// Verifica que el nombre no esté vacío antes de asignarlo
 		if (nombre != NULL && g_strcmp0(nombre, "") != 0) {
@@ -422,20 +453,63 @@ void ABRIR_TABLERO(GtkWidget *widget, gpointer data) {
 			const gsize max_length = 50;  // Establece la longitud
 			gchar nombre_limitado[max_length + 1];  // +1 para el carácter nulo
 			g_strlcpy(nombre_limitado, nombre, max_length + 1);
-			nombre_jugador = g_strdup(nombre_limitado); // Copia el nombre limitado
-			strncpy(nombrejugador1Global,nombre,sizeof(nombrejugador1Global));//Copia el nombre a la variable global
-			printf("%s",nombrejugador1Global);//Copia el nombre a la variable global
+
+			char buffer [100];
+			if (decisiontomada == 1) {
+				snprintf(buffer, sizeof(buffer), "%s (verde)",g_strdup(nombre_limitado));
+				//nombre_jugador2 = g_strdup(nombre_limitado2); // Copia el nombre limitado
+				nombre_jugador = g_strdup(buffer);
+				strncpy(nombrejugador2Global, nombre2,sizeof(nombrejugador2Global));
+
+			} else {
+				snprintf(buffer, sizeof(buffer), "%s [rojo]",g_strdup(nombre_limitado));
+				//nombre_jugador2 = g_strdup(nombre_limitado2); // Copia el nombre limitado
+				nombre_jugador = g_strdup(buffer);
+				strncpy(nombrejugador2Global, nombre2,sizeof(nombrejugador2Global));
+
+			}
+			nombre_jugador = g_strdup(buffer); // Copia el nombre limitado
+			strncpy(nombrejugador1Global, nombre, sizeof(nombrejugador1Global)); //Copia el nombre a la variable global
+			printf("%s", nombrejugador1Global); //Copia el nombre a la variable global
 		} else {
 			// Proporciona un valor predeterminado
-			nombre_jugador = "Jugador Anónimo";
-			strncpy(nombrejugador1Global,nombre_jugador,sizeof(nombrejugador1Global));
+			if (decisiontomada == 1) {
+				nombre_jugador = "Jugador Anónimo (verde)";
+			} else {
+				nombre_jugador = "Jugador Anónimo [rojo]";
+			}
+			strncpy(nombrejugador1Global, nombre_jugador,sizeof(nombrejugador1Global));
 		}
 
 		// Muestra la ventana del tablero
 		gtk_widget_show(menu_tablero);
 		gtk_widget_hide(menu_opciones);
 	}
+
+	if(modo==3){
+		nombre_jugador = "La Computadora (verde)";
+		nombre_jugador2 = "La Computadora [rojo]";
+		modo=2;
+		decisiontomada=2;
+		posiocupada[0]=1;
+		while (turno != 0) {
+			if (decisiontomada == 2) {
+				decisiontomada = 1;
+				turno = computadora(turno);
+				verificarGanador(modo);
+			} else {
+				decisiontomada = 2;
+				turno = computadora(turno);
+				verificarGanador(modo);
+			}
+			actualizar_GTK();
+			verificarGanador(modo);
+
+		}
+
+	}
 }
+
 
 void EXPOSICION_NOMBRE(GtkWidget *widget, gpointer data) {
     // Verifica si hay un nombre de jugador para mostrar
@@ -447,6 +521,7 @@ void EXPOSICION_NOMBRE(GtkWidget *widget, gpointer data) {
     } else if (nombre_jugador != NULL) {
         // Establece el texto en el widget de visualización de nombre
         gtk_label_set_text(GTK_LABEL(tablero_nombre_display), nombre_jugador);
+        gtk_label_set_text(GTK_LABEL(tablero_nombre_display2), nombre_jugador2);
     } else {
         // Maneja el caso donde no hay nombre de jugador
         g_print("Nombre no especificado\n");
@@ -473,36 +548,40 @@ void OCULTAR_CREDITOS(GtkWidget *widget, gpointer data) {
 	gtk_widget_hide(menu_creadores);
 }
 
+
 void verificarjugada(int jugada) {
 
 	if (lamatriz[jugada][0][0] == '\0' && turno != 0) {
+
+
 		if(modo==1&&decisiontomada==1){
 			turno = jugador(turno, jugada);
 			decisiontomada=2;
-			printf("entra primero");
+			verificarGanador(1);
+			//printf("entra primero");
 			enter();
 		}
 		else if(modo==1&&decisiontomada==2){
 			turno=jugador(turno,jugada);
 			decisiontomada=1;
-			printf("entra segundo");
+			verificarGanador(1);
+			//printf("entra segundo");
 			enter();
 		}
-		if(modo==2)
+		if(modo==2){
 		turno = jugador(turno, jugada);
-
-		int posicvacia=0;
-		for (int i = 1; i < 26; i++) {
-			//antes del turno de la computadora se verifica que existen lugares disponibles por si acaso
-			if (lamatriz[i][0][0] == 0 || lamatriz[i][0][0] == '\0') {
-				posicvacia++;
-			}
-		}
-		if (posicvacia != 0) {
+		verificarGanador(modo);
+		if(turno!=0){
 			posiocupada[1] = jugadaGTK;
+			actualizar_GTK();
 			turno = computadora(1);
+			modo=2;
+		    verificarGanador(modo);
+		 }
 		}
-		verificarGanador();
+	}
+	if(turno==0){
+		printf("GEI\n");
 	}
 }
 
@@ -522,7 +601,7 @@ void REINICIAR(GtkWidget *widget, gpointer data) {
     // Actualiza la interfaz gráfica
     actualizar_GTK();
 }
-int botonestogleadoscapturamultiple;
+
 void OCULTAR_SELECCIONAR(GtkWidget *widget, gpointer data) {
 	if (suma < 7  && suma > 1&&botonestogleadoscapturamultiple>1) {
 		sumarDado(suma, jugadaGTK);
@@ -604,7 +683,43 @@ void BOTONES_TOGGLE(GtkToggleButton *toggle_button, gpointer data) {
 		gtk_label_set_text(GTK_LABEL(suma_display), buffer);
 	}
 }
+void mostrar_stats(GtkButton *button, gpointer user_data) {
+    // Ruta al archivo de texto
+       const char *file_path = "/home/lp1-2023/Documentos/Estadisticas";
 
+       FILE *file = fopen(file_path, "r");
+       file = fopen("/home/lp1-2023/Documentos/Estadisticas", "r+");
+		if (file == NULL) {
+			printf("\nEl archivo no existe. Creando uno nuevo...\n");
+			// Abre el archivo en modo escritura para crearlo
+			file = fopen("/home/lp1-2023/Documentos/Estadisticas", "w+");
+			if (file == NULL) {
+				printf("Error al crear el archivo.\n");
+				exit(EXIT_FAILURE);
+			}
+			printf("Archivo creado con éxito.\n");
+		}
+       if (file != NULL) {
+              // Obtener el tamaño del archivo
+              fseek(file, 0, SEEK_END);
+              long file_size = ftell(file);
+              fseek(file, 0, SEEK_SET);
+
+              // Leer el contenido del archivo
+              char *file_content = g_malloc(file_size + 1);
+              fread(file_content, 1, file_size, file);
+              file_content[file_size] = '\0';
+              // Cerrar el archivo
+              fclose(file);
+              // Mostrar el contenido en una ventana de mensaje
+              GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,GTK_MESSAGE_INFO,GTK_BUTTONS_OK,"Estadísticas de jugadores pasados:\n%s", file_content);
+              gtk_dialog_run(GTK_DIALOG(dialog));
+              // Liberar memoria
+              g_free(file_content);
+              gtk_widget_destroy(dialog);
+          }
+
+}
 int main(int argc, char *argv[])
 
 {
@@ -629,6 +744,7 @@ int main(int argc, char *argv[])
 	g_signal_connect(tablero_como_jugar, "clicked",G_CALLBACK(MOSTRAR_INSTRUCCIONES), NULL);
 	g_signal_connect(tablero_creditos, "clicked", G_CALLBACK(MOSTRAR_CREDITOS),NULL);
 	g_signal_connect(tablero_reiniciar, "clicked", G_CALLBACK(REINICIAR), NULL);
+	g_signal_connect(menu_stats, "clicked", G_CALLBACK(mostrar_stats), NULL);
 	//En el menu como jugar, el cerrar
 	g_signal_connect(como_jugar_cerrar, "clicked",G_CALLBACK(OCULTAR_INSTRUCCIONES), NULL);
 	//En el menu creditos, el cerrar

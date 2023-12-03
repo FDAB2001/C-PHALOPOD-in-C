@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <gtk/gtk.h>
+#include "funciones.h"
 extern GtkWidget *menu_seleccionar,*izquierdaGTK,*derechaGTK,*arribaGTK,*abajoGTK,*menu_tablero,*explicar_display;
 extern int lamatriz[26][7][2];
 extern int suma;
 extern int decisiontomada;
 extern int vector[5];
-void enter();
+
+//void enter();
 void dadojugador(int pos, int sumas) { //funcion que sirve para poder identificar a los dados de la compu
 	if (decisiontomada == 1) {
 		lamatriz[pos][sumas][0] = 1; //la compu se identificara por corchete
@@ -37,7 +39,6 @@ void dadoMas(int invalido,int jugada,int dif){
 	vector[1]=derecha;
 	vector[2]=arriba;
 	vector[3]=abajo;
-
 	char bufferIZQ[20],bufferDER[20],bufferARR[20],bufferABA[20];
 	if (invalido) {
 		for(int i=0;i<4;i++){
@@ -52,14 +53,8 @@ void dadoMas(int invalido,int jugada,int dif){
 				suma=0;
 				if((i!=invalido-1&&j!=invalido-1)&&i!=j){
 					suma=vector[i]+vector[j];
-					printf("Suma es: %d\n",suma);
 				}
 				if(suma<=6&&suma!=0){
-					printf("\n %d funciona",comprobar);
-					printf("%d izq",vector[0]);
-					printf("%d der",vector[1]);
-					printf("%d arr",vector[2]);
-					printf("%d aba",vector[3]);
 					comprobar++;
 				}
 			}
@@ -284,5 +279,9 @@ int jugador(int turno, int jugada) {
 
 	turno = 2;
 	ponerDadojugador(jugada);
+	int dispox=diceposisdispo();
+			if(dispox==0){
+				turno=0;
+			}
 	return turno;
 }

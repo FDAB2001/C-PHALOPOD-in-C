@@ -20,3 +20,4 @@ int vector[] = { 0, 0, 0, 0, '\0' };
 char nombrejugador1Global[50];
 char nombrejugador2Global[50];
 #endif //VARIABLES_H_
+
