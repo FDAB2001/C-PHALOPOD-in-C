@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <gtk/gtk.h>
+#include "funciones.h"
 extern GtkWidget *menu_seleccionar,*izquierdaGTK,*derechaGTK,*arribaGTK,*abajoGTK,*menu_tablero,*explicar_display;
 extern int lamatriz[26][7][2];
 extern int suma;
@@ -284,5 +285,9 @@ int jugador(int turno, int jugada) {
 
 	turno = 2;
 	ponerDadojugador(jugada);
+	int dispox=diceposisdispo();
+			if(dispox==0){
+				turno=0;
+			}
 	return turno;
 }
