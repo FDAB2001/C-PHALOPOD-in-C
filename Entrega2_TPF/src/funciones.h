@@ -12,7 +12,7 @@ void decirturnoini(int);
 void decirparente();
 int numeroAleatorio(int,int);
 int verificarGanador(int);
-void stats(char *, int);
+void stats(char *cadena2, int gano);
 int diceposisdispo();
 int lugareslibres();
 
