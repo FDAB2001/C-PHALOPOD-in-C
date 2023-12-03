@@ -619,8 +619,20 @@ void mostrar_stats(GtkButton *button, gpointer user_data) {
        const char *file_path = "/home/lp1-2023/Documentos/Estadisticas";
 
        FILE *file = fopen(file_path, "r");
+       file = fopen("/home/lp1-2023/Documentos/Estadisticas", "r+");
+        	        if (file == NULL) {
+        	            printf("\nEl archivo no existe. Creando uno nuevo...\n");
 
-          if (file != NULL) {
+        	            // Abre el archivo en modo escritura para crearlo
+        	            file = fopen("/home/lp1-2023/Documentos/Estadisticas", "w+");
+        	            if (file == NULL) {
+        	                printf("Error al crear el archivo.\n");
+        	                exit(EXIT_FAILURE);
+        	            }
+
+        	            printf("Archivo creado con éxito.\n");
+        	        }
+       if (file != NULL) {
               // Obtener el tamaño del archivo
               fseek(file, 0, SEEK_END);
               long file_size = ftell(file);
