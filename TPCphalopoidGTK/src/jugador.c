@@ -126,7 +126,7 @@ void ponerDadojugador(int jugada) {
 	switch (jugada) {
 	case 1:
 		suma = derecha + abajo;
-		if (derecha != 0 && abajo != 0 && suma < 7) {
+		if (derecha != 0 && abajo != 0 && (suma < 7&&suma>1)) {
 			sumarDado(suma, jugada);
 			lamatriz[jugada + 1][0][0] = '\0';
 			lamatriz[jugada + 5][0][0] = '\0';
@@ -137,7 +137,7 @@ void ponerDadojugador(int jugada) {
 
 	case 5:
 		suma = izquierda + abajo;
-		if (izquierda != 0 && abajo != 0 && suma < 7) {
+		if (izquierda != 0 && abajo != 0 && (suma < 7&&suma>1)) {
 			sumarDado(suma, jugada);
 			lamatriz[jugada - 1][0][0] = '\0';
 			lamatriz[jugada + 5][0][0] = '\0';
@@ -147,7 +147,7 @@ void ponerDadojugador(int jugada) {
 		break;
 	case 21:
 		suma = derecha + arriba;
-		if (derecha != 0 && arriba != 0 && suma < 7) {
+		if (derecha != 0 && arriba != 0 && (suma < 7&&suma>1)) {
 			sumarDado(suma, jugada);
 			lamatriz[jugada + 1][0][0] = '\0';
 			lamatriz[jugada - 5][0][0] = '\0';
@@ -157,7 +157,7 @@ void ponerDadojugador(int jugada) {
 		break;
 	case 25:
 		suma = izquierda + arriba;
-		if (izquierda != 0 && arriba != 0 && suma < 7) {
+		if (izquierda != 0 && arriba != 0 && (suma < 7&&suma>1)) {
 			sumarDado(suma, jugada);
 			lamatriz[jugada - 1][0][0] = '\0';
 			lamatriz[jugada - 5][0][0] = '\0';
