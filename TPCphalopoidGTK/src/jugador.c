@@ -174,7 +174,7 @@ void ponerDadojugador(int jugada) {
 		int j = 0;
 		for (int i = 0; i < 4; i++) {
 			if (vector[i] == 6) {
-				suma -= vector[i];
+				suma =suma - vector[i];
 			}
 			if (vector[i] != 0 && i != 0 && vector[i] != 6) {
 				dif++;
@@ -182,7 +182,7 @@ void ponerDadojugador(int jugada) {
 				j++;
 			}
 		}
-		if (suma < 7 && dif == 2) {
+		if ((suma < 7&&suma>1) && dif == 2) {
 			sumarDado(suma, jugada);
 			for (int i = 0; i < dif; i++) {
 				lamatriz[jugada + ubi[i]][0][0] = '\0';
@@ -199,7 +199,7 @@ void ponerDadojugador(int jugada) {
 		int j = 0;
 		for (int i = 0; i < 4; i++) {
 			if (vector[i] == 6) {
-				suma -= vector[i];
+				suma = suma-vector[i];
 			}
 			if (vector[i] != 0 && i != 1 && vector[i] != 6) {
 				dif++;
@@ -207,7 +207,7 @@ void ponerDadojugador(int jugada) {
 				j++;
 			}
 		}
-		if (suma < 7 && dif == 2) {
+		if ((suma < 7&&suma>1) && dif == 2) {
 			sumarDado(suma, jugada);
 			for (int i = 0; i < dif; i++) {
 				lamatriz[jugada + ubi[i]][0][0] = '\0';
@@ -224,7 +224,7 @@ void ponerDadojugador(int jugada) {
 		int j = 0;
 		for (int i = 0; i < 4; i++) {
 			if (vector[i] == 6) {
-				suma -= vector[i];
+				suma = suma-vector[i];
 			}
 			if (vector[i] != 0 && i != 2 && vector[i] != 6) {
 				dif++;
@@ -232,7 +232,7 @@ void ponerDadojugador(int jugada) {
 				j++;
 			}
 		}
-		if (suma < 7 && dif == 2) {
+		if ((suma < 7&&suma>1) && dif == 2) {
 			sumarDado(suma, jugada);
 			for (int i = 0; i < dif; i++) {
 				lamatriz[jugada + ubi[i]][0][0] = '\0';
@@ -250,7 +250,7 @@ void ponerDadojugador(int jugada) {
 		int j = 0;
 		for (int i = 0; i < 4; i++) {
 			if (vector[i] == 6) {
-				suma -= vector[i];
+				suma =suma- vector[i];
 			}
 			if (vector[i] != 0 && i != 3 && vector[i] != 6) {
 				dif++;
@@ -258,7 +258,7 @@ void ponerDadojugador(int jugada) {
 				j++;
 			}
 		}
-		if (suma < 7 && dif == 2) {
+		if ((suma < 7&&suma>1)&& dif == 2) {
 			sumarDado(suma, jugada);
 			for (int i = 0; i < dif; i++) {
 				lamatriz[jugada + ubi[i]][0][0] = '\0';

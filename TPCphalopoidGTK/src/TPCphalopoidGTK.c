@@ -437,6 +437,7 @@ void ABRIR_TABLERO(GtkWidget *widget, gpointer data) {
 				}else{
 					nombre_jugador2 = "Jugador_Anonimo_2 [rojo]";
 				}
+				strncpy(nombrejugador2Global, nombre_jugador2,sizeof(nombrejugador2Global));
 			}
 		} else if (modo == 2) {
 			if (decisiontomada == 2) {
@@ -581,7 +582,7 @@ void verificarjugada(int jugada) {
 		}
 	}
 	if(turno==0){
-		printf("GEI\n");
+		printf("Fin del juego\n");
 	}
 }
 
