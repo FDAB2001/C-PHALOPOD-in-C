@@ -291,7 +291,7 @@ void stats(char *cadena2, int gano) {
 		}
 
 		//--------------------------------------------------------------------------------------------------//
-		//en esta parte se empieza a ordenar el archivo y si pones esta parte dentro de thapaolid explota todoo
+		//en esta parte se empieza a ordenar el archivo
 		for (int i = 0; i < contlin; i++) {
 			arraylineas2[i] = strdup(arrayDeLineas[i]);
 		} //tuve que meter las lineas del archivo que estaban en arrayDeLineas dentro del arraylineas2 porque al parecer la funcion
